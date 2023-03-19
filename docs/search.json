@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html#two-methods",
+    "href": "index.html#two-methods",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Two methods",
+    "text": "Two methods\n\nProbability generating functions\nFirst-step analysis"
+  },
+  {
+    "objectID": "index.html#compartmental-models",
+    "href": "index.html#compartmental-models",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Compartmental models",
+    "text": "Compartmental models\nConsider the Susceptible-Infectious-Removed (SIR) model\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nIn the deterministic version\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate\n\nRandomness in contacts between individuals is important for determining whether or not a major outbreak occurs \\(\\Rightarrow\\) inappropriate for modelling the start of an outbreak"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models",
+    "href": "index.html#stochastic-sir-models",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm to simulate events from SIR model\n2 possible events:\n\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-1",
+    "href": "index.html#stochastic-sir-models-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\nEarly stage of the outbreak: \\(I(t) = 1\\), \\(S(t) \\approx N\\)\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-2",
+    "href": "index.html#stochastic-sir-models-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\nLet X ~ Geo(p)\n\\[G_X(s) = \\mathbb{E}(s^X) = \\]\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)\n\n\n\nCode\nsolve_q <- function(R0, n){\n  # define the equation\n  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result <- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 <- 2\nn <- seq(0.001, 5, 0.001)\nq <- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] <- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+  }
+]

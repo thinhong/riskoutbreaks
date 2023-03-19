@@ -71,7 +71,7 @@ $rS = r + r^2 + r^3 + r^4 + ...$
 
 $\Rightarrow S - rS = 1 \Leftrightarrow S(1 - r) = 1 \Leftrightarrow S = \frac {1} {1 - r}$
 
-## SInR
+<!-- ## SInR -->
 
 ```{r}
 #| code-fold: true
