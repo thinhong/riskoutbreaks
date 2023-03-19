@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "index.html#compartmental-models",
+    "href": "index.html#compartmental-models",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Compartmental models",
+    "text": "Compartmental models\nConsider the Susceptible-Infectious-Removed (SIR) model\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nIn the deterministic version\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate\n\nRandomness in contacts between individuals is important for determining whether or not a major outbreak occurs \\(\\Rightarrow\\) inappropriate for modelling the start of an outbreak"
+  },
+  {
+    "objectID": "index.html#test",
+    "href": "index.html#test",
+    "title": "Estimate risk of outbreaks",
+    "section": "Test",
+    "text": "Test"
+  },
+  {
+    "objectID": "index.html#gillespie-algorithm",
+    "href": "index.html#gillespie-algorithm",
+    "title": "Estimate risk of outbreaks",
+    "section": "Gillespie algorithm",
+    "text": "Gillespie algorithm\nEarly stage of the outbreak: \\(I(t) = 1\\), \\(S(t) \\approx N\\)\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#gillespie-algorithm-1",
+    "href": "index.html#gillespie-algorithm-1",
+    "title": "Estimate risk of outbreaks",
+    "section": "Gillespie algorithm",
+    "text": "Gillespie algorithm\nEarly stage of the outbreak: \\(I(t) = 1\\), \\(S(t) \\approx N\\)\nP(infection event) = \\(\\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\nP(removal event) = \\(\\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#si_nr",
+    "href": "index.html#si_nr",
+    "title": "Estimate the risk of outbreaks",
+    "section": "\\(SI_{n}R\\)",
+    "text": "\\(SI_{n}R\\)"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Estimate risk of outbreaks",
+    "section": "",
+    "text": "Let X ~ Geo(p)\n\\[G_X(s) = \\mathbb{E}(s^X) = \\]\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)"
+  },
+  {
+    "objectID": "index.html#two-methods-underlying-calculations-of-the-probability-of-a-major-outbreak",
+    "href": "index.html#two-methods-underlying-calculations-of-the-probability-of-a-major-outbreak",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Two methods underlying calculations of the probability of a major outbreak",
+    "text": "Two methods underlying calculations of the probability of a major outbreak\n\nProbability generating functions\nFirst-step analysis"
+  },
+  {
+    "objectID": "index.html#compartmental-outbreak-models",
+    "href": "index.html#compartmental-outbreak-models",
+    "title": "Estimate risk of outbreaks",
+    "section": "Compartmental outbreak models",
+    "text": "Compartmental outbreak models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --σ--> R[\"R(t)\"]"
+  },
+  {
+    "objectID": "index.html#deterministic-compartmental-outbreak-models",
+    "href": "index.html#deterministic-compartmental-outbreak-models",
+    "title": "Estimate risk of outbreaks",
+    "section": "Deterministic compartmental outbreak models",
+    "text": "Deterministic compartmental outbreak models\nConsider the Susceptible-Infectious-Removed (SIR) model\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --σ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nIn the deterministic version\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate\n\nRandomness in contacts between individuals is important for determining whether or not a major outbreak occurs \\(\\Rightarrow\\) inappropriate for modelling the start of an outbreak"
+  },
+  {
+    "objectID": "index.html#stochastic-compartmental-outbreak-models",
+    "href": "index.html#stochastic-compartmental-outbreak-models",
+    "title": "Estimate risk of outbreaks",
+    "section": "Stochastic compartmental outbreak models",
+    "text": "Stochastic compartmental outbreak models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --σ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie simulation algorithm\nSimulate events from the SIR model:\n\nInfection event\nRemoval event"
+  },
+  {
+    "objectID": "index.html#stochastic-models",
+    "href": "index.html#stochastic-models",
+    "title": "Estimate risk of outbreaks",
+    "section": "Stochastic models",
+    "text": "Stochastic models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --σ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm\nSimulate events from the SIR model:\n\nInfection event: \\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\nRemoval event: \\(\\mathbb{P}\\)(removal event) = \\(\\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models",
+    "href": "index.html#stochastic-sir-models",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm to simulate events from SIR model\n2 possible events:\n\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-1",
+    "href": "index.html#stochastic-sir-models-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\nEarly stage of the outbreak: \\(I(t) = 1\\), \\(S(t) \\approx N\\)\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-2",
+    "href": "index.html#stochastic-sir-models-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models",
+    "text": "Stochastic SIR models\nLet X ~ Geo(p)\n\\[G_X(s) = \\mathbb{E}(s^X) = \\]\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)"
+  },
+  {
+    "objectID": "index.html#two-methods",
+    "href": "index.html#two-methods",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Two methods",
+    "text": "Two methods\n\nProbability generating functions\nFirst-step analysis"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Estimate the risk of outbreaks",
+    "section": "",
+    "text": "Probability generating functions\nFirst-step analysis"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#sinr",
+    "href": "index.html#sinr",
+    "title": "Estimate the risk of outbreaks",
+    "section": "SInR",
+    "text": "SInR\n\n\nCode\nsolve_q <- function(R0, n){\n  # define the equation\n  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result <- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 <- 2\nn <- seq(0.001, 5, 0.001)\nq <- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] <- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+  }
+]

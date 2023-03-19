@@ -1,0 +1,99 @@
+---
+title: "Estimate the risk of outbreaks"
+author: "Ong Phuc Thinh"
+format:
+  revealjs:
+    scrollable: true
+    chalkboard: true
+    code-fold: true
+---
+
+## Two methods
+
+*   Probability generating functions
+*   First-step analysis
+
+## Compartmental models
+
+Consider the Susceptible-Infectious-Removed (SIR) model
+
+```{mermaid}
+flowchart LR
+  S["S(t)"] --βI/N--> I["I(t)"]
+  I --γ--> R["R(t)"]
+```
+
+In the **deterministic version**
+
+* $\beta$: infection rate
+* $\gamma$: removal rate
+
+Randomness in contacts between individuals is important for determining whether or not a major outbreak occurs $\Rightarrow$ **inappropriate** for modelling the start of an outbreak
+
+## Stochastic SIR models
+
+```{mermaid}
+flowchart LR
+  S["S(t)"] --βI/N--> I["I(t)"]
+  I --γ--> R["R(t)"]
+```
+
+**Gillespie algorithm** to simulate events from SIR model
+
+2 possible events:
+
+- $\mathbb{P}$(infection event) = $\frac{\beta \frac{I(t)}{N} S(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}$
+- $\mathbb{P}$(removal event) = $\frac{\gamma I(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}$
+
+## Stochastic SIR models
+
+Early stage of the outbreak: $I(t) = 1$, $S(t) \approx N$
+
+$\mathbb{P}$(infection event) = $\frac{\beta \frac {I(t)} {N} S(t)}{\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\beta} {\beta + \gamma}$
+
+$\mathbb{P}$(removal event) = $\frac {\gamma I(t)} {\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\gamma} {\beta + \gamma}$
+
+## Stochastic SIR models
+
+
+
+Let X \~ Geo(p)
+
+$$G_X(s) = \mathbb{E}(s^X) = $$
+
+$1 + r + r^2 + r^3 + ... = \sum_{x=0}^{\infty} r^x = \frac {1} {1 - r}$ with $|r| < 1$
+
+Prove this:
+
+$S = 1 + r + r^2 + r^3 + ...$
+
+$rS = r + r^2 + r^3 + r^4 + ...$
+
+$\Rightarrow S - rS = 1 \Leftrightarrow S(1 - r) = 1 \Leftrightarrow S = \frac {1} {1 - r}$
+
+## SInR
+
+```{r}
+#| code-fold: true
+#| echo: true
+solve_q <- function(R0, n){
+  # define the equation
+  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q
+  
+  # use uniroot function to find the root of the equation
+  result <- uniroot(f, lower=0, upper=0.999)$root
+  
+  return(result)
+}
+
+R0 <- 2
+n <- seq(0.001, 5, 0.001)
+q <- numeric(length(n))
+
+for (i in 1:length(n)){
+  q[i] <- solve_q(R0, n[i])
+}
+
+plot(n, 1-q, type="l", xlab="n", ylab="1-q", 
+     xlim = c(0, 5), ylim = c(0, 0.8))
+```
