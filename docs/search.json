@@ -18,20 +18,230 @@
     "href": "index.html#stochastic-sir-models",
     "title": "Estimate the risk of outbreaks",
     "section": "Stochastic SIR models",
-    "text": "Stochastic SIR models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm to simulate events from SIR model\n2 possible events:\n\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
+    "text": "Stochastic SIR models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm\n2 possible events:\n\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
   },
   {
     "objectID": "index.html#stochastic-sir-models-1",
     "href": "index.html#stochastic-sir-models-1",
     "title": "Estimate the risk of outbreaks",
-    "section": "Stochastic SIR models",
-    "text": "Stochastic SIR models\nEarly stage of the outbreak: \\(I(t) = 1\\), \\(S(t) \\approx N\\)\n\\(\\mathbb{P}\\)(infection event) = \\(\\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\n\\(\\mathbb{P}\\)(removal event) = \\(\\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+    "section": "Stochastic SIR models (1)",
+    "text": "Stochastic SIR models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm\n2 possible events:\n\n\\(\\mathbb{P}\\text{(infection event)} = \\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\text{(removal event)} = \\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
   },
   {
     "objectID": "index.html#stochastic-sir-models-2",
     "href": "index.html#stochastic-sir-models-2",
     "title": "Estimate the risk of outbreaks",
-    "section": "Stochastic SIR models",
-    "text": "Stochastic SIR models\nLet X ~ Geo(p)\n\\[G_X(s) = \\mathbb{E}(s^X) = \\]\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)\n\n\n\nCode\nsolve_q <- function(R0, n){\n  # define the equation\n  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result <- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 <- 2\nn <- seq(0.001, 5, 0.001)\nq <- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] <- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+    "section": "Stochastic SIR models (2)",
+    "text": "Stochastic SIR models (2)\nEarly stage:\n\\(I(t) = 1\\), \\(S(t) \\approx N\\)\n\\(\\mathbb{P}\\text{(infection event)} = \\frac{\\beta \\frac {I(t)} {N} S(t)}{\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\beta} {\\beta + \\gamma}\\)\n\\(\\mathbb{P}\\text{(removal event)} = \\frac {\\gamma I(t)} {\\beta \\frac {I(t)} {N} S(t) + \\gamma I(t)} \\approx \\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#si_nr",
+    "href": "index.html#si_nr",
+    "title": "Estimate the risk of outbreaks",
+    "section": "\\(SI_{n}R\\)",
+    "text": "\\(SI_{n}R\\)\n\n\nCode\nsolve_q <- function(R0, n){\n  # define the equation\n  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result <- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 <- 2\nn <- seq(0.001, 5, 0.001)\nq <- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] <- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+  },
+  {
+    "objectID": "index.html#based-on-these-papers",
+    "href": "index.html#based-on-these-papers",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Based on these papers",
+    "text": "Based on these papers\n\nSouthall E, Ogi-Gittins Z, Kaye AR, Hart WS, Lovell-Read FA, Thompson RN. A practical guide to mathematical methods for estimating infectious disease outbreak risks. Journal of Theoretical Biology. 2023 Jan 20:111417. https://doi.org/10.1016/j.jtbi.2023.111417\nSachak-Patwa R, Byrne HM, Dyson L, Thompson RN. The risk of SARS-CoV-2 outbreaks in low prevalence settings following the removal of travel restrictions. Communications Medicine. 2021 Oct 15;1(1):39. https://doi.org/10.1038/s43856-021-00038-8"
+  },
+  {
+    "objectID": "index.html#instantaneous-outbreak-risk-ior",
+    "href": "index.html#instantaneous-outbreak-risk-ior",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Instantaneous Outbreak Risk (IOR)",
+    "text": "Instantaneous Outbreak Risk (IOR)\nThe risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that pathogen transmissibility is fixed at its value when the imported case enters the population"
+  },
+  {
+    "objectID": "index.html#case-outbreak-risk-cor",
+    "href": "index.html#case-outbreak-risk-cor",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Case Outbreak Risk (COR)",
+    "text": "Case Outbreak Risk (COR)"
+  },
+  {
+    "objectID": "index.html#simulated-outbreak-risk-sor",
+    "href": "index.html#simulated-outbreak-risk-sor",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Simulated Outbreak Risk (SOR)",
+    "text": "Simulated Outbreak Risk (SOR)\nSimulating the stochastic model 10,000 times starting from 1 infected individual\nSOR = the proportion of simulations in which the number of infected hosts exceeds a pre-defined threshold value (e.g. 100 cases)"
+  },
+  {
+    "objectID": "index.html#numerical-outbreak-risk-nor",
+    "href": "index.html#numerical-outbreak-risk-nor",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Numerical Outbreak Risk (NOR)",
+    "text": "Numerical Outbreak Risk (NOR)"
+  },
+  {
+    "objectID": "index.html#deterministic-sir-models",
+    "href": "index.html#deterministic-sir-models",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Deterministic SIR models",
+    "text": "Deterministic SIR models\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate"
+  },
+  {
+    "objectID": "index.html#deterministic-sir-models-1",
+    "href": "index.html#deterministic-sir-models-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Deterministic SIR models",
+    "text": "Deterministic SIR models\nRandomness in contacts between individuals is important for determining whether or not a major outbreak occurs \\(\\Rightarrow\\) inappropriate for modelling the start of an outbreak"
+  },
+  {
+    "objectID": "index.html#extinction-probability",
+    "href": "index.html#extinction-probability",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Extinction probability",
+    "text": "Extinction probability\n\\[q_n = \\mathbb{P}\\text{(extinct by generation n)} = \\mathbb{P}(Z_n = 0)\\]\n\\[q = q_\\infty = \\mathbb{P}\\text{(ultimate extinction)} = \\mathbb{P}(\\lim_{n\\to\\infty} Z_n) = \\lim_{n\\to\\infty}\\mathbb{P}(Z_n) = \\lim_{n\\to\\infty} q_n\\]\nTheorem\nLet q be the probability of ultimate extinction. Then q is the smallest non-negative solution of the equation \\(G(q) = q\\) (or the fixed point).\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)"
+  },
+  {
+    "objectID": "index.html#why-gq-q-1",
+    "href": "index.html#why-gq-q-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Why \\(G(q) = q\\)? (1)",
+    "text": "Why \\(G(q) = q\\)? (1)\nLemma: Let \\(q_n = \\mathbb{P}(Z_n = 0)\\) (probability of extinction by generation n). Then \\(q_n = G(q_{n - 1})\\)\nProof:\n\\(G_n(s)\\) is the PGF of \\(Z_n\\), then \\(G_n(0) = \\mathbb{P}(Z_n = 0)\\)\n\n\n\n\\(G_X(s) = \\mathbb{E}(s^X) = \\sum_{x=0}^{\\infty} s^x \\mathbb{P}(X = x)\\)\n\\(G_X(0) = \\mathbb{E}(s^0) = \\sum_{x=0}^{\\infty} s^0 \\mathbb{P}(X = 0) = \\mathbb{P}(X = 0)\\) (because \\(s^0 = 1\\))\n\n\n\nSo \\(q_n = \\mathbb{P}(Z_n = 0) = G_n(0)\\). Similarly, \\(q_{n - 1} = \\mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)\\)\nNow \\(G_n(0) = \\underbrace{G(G(G(...G}_\\text{n times}(0)...))) = G(G_{n - 1}(0))\\)\nBecause \\(q_{n - 1} = G_{n - 1}(0)\\)\nSo \\(q_n = G_n(0) = G(G_{n - 1}(0)) = G(q_{n - 1})\\)"
+  },
+  {
+    "objectID": "index.html#why-gq-q-2",
+    "href": "index.html#why-gq-q-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Why \\(G(q) = q\\)? (2)",
+    "text": "Why \\(G(q) = q\\)? (2)"
+  },
+  {
+    "objectID": "index.html#author",
+    "href": "index.html#author",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Author",
+    "text": "Author\n\n\n\n\n\n\n\nRobin Thompson\nAssociate Professor of Applied Mathematics\nMathematics Institute, University of Warwick\nPhD in Mathematical Epidemiology, University of Cambridge"
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nSomya Mehra: for very intuitive explanation of stochastic processes"
+  },
+  {
+    "objectID": "index.html#branching-process",
+    "href": "index.html#branching-process",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Branching process",
+    "text": "Branching process"
+  },
+  {
+    "objectID": "index.html#galton-watson-branching-process",
+    "href": "index.html#galton-watson-branching-process",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Galton-Watson branching process",
+    "text": "Galton-Watson branching process\n\n\n\n\n\n\n\nIgnore the precise times at which infections occur\nInfections can be separated into discrete generations\nAll infections generated by a specific individual appear in the same generation."
+  },
+  {
+    "objectID": "index.html#galton-watson-branching-process-1",
+    "href": "index.html#galton-watson-branching-process-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Galton-Watson branching process (1)",
+    "text": "Galton-Watson branching process (1)\n\n\n\n\n\n\n\nIgnore the precise times at which infections occur\nInfections can be separated into discrete generations\nAll infections generated by a specific individual appear in the same generation."
+  },
+  {
+    "objectID": "index.html#galton-watson-branching-process-2",
+    "href": "index.html#galton-watson-branching-process-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Galton-Watson branching process (2)",
+    "text": "Galton-Watson branching process (2)\n\n\nStart with 1 individual at generation n = 0.\nEach individual lives 1 generation, has \\(Y\\) offspring, and dies.\n\\(Y\\) takes values 0, 1, 2, …, and the probability of producing \\(k\\) offspring is \\(\\mathbb{P}(Y = k) = p_k\\)."
+  },
+  {
+    "objectID": "index.html#compartmental-outbreak-models-1",
+    "href": "index.html#compartmental-outbreak-models-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Compartmental outbreak models (1)",
+    "text": "Compartmental outbreak models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate"
+  },
+  {
+    "objectID": "index.html#compartmental-outbreak-models-2",
+    "href": "index.html#compartmental-outbreak-models-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Compartmental outbreak models (2)",
+    "text": "Compartmental outbreak models (2)\n\nRandomness in contacts between individuals is important for determining whether or not a major outbreak occurs\nDeterministic model is inappropriate\nInstead, use stochastic model"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-3",
+    "href": "index.html#stochastic-sir-models-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models (3)",
+    "text": "Stochastic SIR models (3)\nProbability that 1 infected host generates k infections is:\n\\[\\mathbb{P}(X = k) = \\left( \\frac{\\beta}{\\beta + \\gamma} \\right)^k \\times \\frac{\\gamma}{\\beta + \\gamma}\\]\n\nFirst generate k infections\nThen be removed\nThe number of failures prior to the first success\nA geometric distribution with “success probability” \\(\\frac {\\gamma} {\\beta + \\gamma}\\)"
+  },
+  {
+    "objectID": "index.html#stochastic-sir-models-4",
+    "href": "index.html#stochastic-sir-models-4",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Stochastic SIR models (4)",
+    "text": "Stochastic SIR models (4)\nLet X ~ Geo(p)\n\\[G_X(s) = \\mathbb{E}(s^X) = \\]\n\\(1 + r + r^2 + r^3 + ... = \\sum_{x=0}^{\\infty} r^x = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\nProve this:\n\\(S = 1 + r + r^2 + r^3 + ...\\)\n\\(rS = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow S - rS = 1 \\Leftrightarrow S(1 - r) = 1 \\Leftrightarrow S = \\frac {1} {1 - r}\\)"
+  },
+  {
+    "objectID": "index.html#galton-watson-branching-process-3",
+    "href": "index.html#galton-watson-branching-process-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Galton-Watson branching process (3)",
+    "text": "Galton-Watson branching process (3)\n\n\nAll individuals reproduce independently.\nIndividuals 1, 2, …, n have family sizes \\(Y_1\\), \\(Y_2\\), …, \\(Y_n\\), where each \\(Y_i\\) has the same offspring distribution as \\(Y\\)."
+  },
+  {
+    "objectID": "index.html#methods-for-estimating-the-probability-of-a-major-outbreak",
+    "href": "index.html#methods-for-estimating-the-probability-of-a-major-outbreak",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Methods for estimating the probability of a major outbreak",
+    "text": "Methods for estimating the probability of a major outbreak\nTwo methods:\n\nProbability generating functions\nFirst-step analysis"
+  },
+  {
+    "objectID": "index.html#probability-generating-functions-1",
+    "href": "index.html#probability-generating-functions-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Probability generating functions (1)",
+    "text": "Probability generating functions (1)\nThe early outbreak can be approximated as a branching process:\n\nEach infected individual generates a number of new infections that is drawn from the offspring distribution\nAssumption: All infected cases independently generate secondary cases (independently draws from the offspring distribution)\nThe offspring distribution is geometric distribution (explained above)"
+  },
+  {
+    "objectID": "index.html#probability-generating-functions-2",
+    "href": "index.html#probability-generating-functions-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Probability generating functions (2)",
+    "text": "Probability generating functions (2)\nProbability generating function (PGF) is useful to deal with sums and limits of discrete random variables.\n\\[G_X(s) = \\mathbb{E}(s^X) = \\sum_{x = 0}^\\infty s^x \\mathbb{P}(X = x)\\]\n\\[G_X(s) = s^0 \\mathbb{P}(X = 0) + s^1 \\mathbb{P}(X = 1) + s^2 \\mathbb{P}(X = 2) + ...\\]\nPGF is a function that can generate all probabilities of the distribution."
+  },
+  {
+    "objectID": "index.html#probability-generating-functions-3",
+    "href": "index.html#probability-generating-functions-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Probability generating functions (3)",
+    "text": "Probability generating functions (3)\nPGF can generate all probabilities of the distribution.\nLet \\(p_0 = \\mathbb{P}(X = 0)\\), \\(p_1 = \\mathbb{P}(X = 1)\\)…\n\\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + ...\\]\nIf \\(s = 0\\), \\(G_X(s) = G(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + ...\\)\nBecause"
+  },
+  {
+    "objectID": "index.html#calculate-probabilities-with-pgf-1",
+    "href": "index.html#calculate-probabilities-with-pgf-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Calculate probabilities with PGF (1)",
+    "text": "Calculate probabilities with PGF (1)\nLet \\(p_0 = \\mathbb{P}(X = 0)\\), \\(p_1 = \\mathbb{P}(X = 1)\\)…\n\\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...\\]\nIf \\(s = 0\\), then \\(G(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...\\)\nBecause \\(0^0 = 1\\) and \\(0^1 = 0^2 = 0^3 = ... = 0\\)\nTherefore \\(G(0) = p_0\\)"
+  },
+  {
+    "objectID": "index.html#calculate-probabilities-with-pgf-2",
+    "href": "index.html#calculate-probabilities-with-pgf-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Calculate probabilities with PGF (2)",
+    "text": "Calculate probabilities with PGF (2)\n\\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...\\]\nFirst derivative: \\(G'_X(s) = p_1 + 2 p_2 s + 3 p_3 s^2 + 4 p_4 s^3 ...\\)\nIf \\(s = 0\\), then \\(G'_X(0) = p_1\\)\nSecond derivative: \\(G''_X(s) = 2 p_2 + 6 p_3 s + 12 p_4 s^2 ...\\)\nIf \\(s = 0\\), then \\(G''_X(0) = 2 p_2\\) or \\(p_2 = \\frac{G''_X(0)}{2}\\)"
+  },
+  {
+    "objectID": "index.html#same-corresponding-author",
+    "href": "index.html#same-corresponding-author",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Same corresponding author",
+    "text": "Same corresponding author\n\n\n\n\n\n\n\nRobin Thompson\nAssociate Professor of Applied Mathematics\nMathematics Institute, University of Warwick\nPhD in Mathematical Epidemiology, University of Cambridge"
+  },
+  {
+    "objectID": "index.html#pgf-of-geometric-distribution",
+    "href": "index.html#pgf-of-geometric-distribution",
+    "title": "Estimate the risk of outbreaks",
+    "section": "PGF of geometric distribution",
+    "text": "PGF of geometric distribution"
   }
 ]

@@ -7,7 +7,7 @@
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.335">
 
   <meta name="author" content="Ong Phuc Thinh">
   <title>riskoutbreaks - Estimate the risk of outbreaks</title>
@@ -405,17 +405,34 @@ Ong Phuc Thinh
 </div>
 
 </section>
-<section id="two-methods" class="slide level2">
-<h2>Two methods</h2>
+<section id="based-on-these-papers" class="slide level2">
+<h2>Based on these papers</h2>
 <ul>
-<li>Probability generating functions</li>
-<li>First-step analysis</li>
+<li><p>Southall E, Ogi-Gittins Z, Kaye AR, Hart WS, Lovell-Read FA, <strong>Thompson RN</strong>. A practical guide to mathematical methods for estimating infectious disease outbreak risks. Journal of Theoretical Biology. 2023 Jan 20:111417. <a href="https://doi.org/10.1016/j.jtbi.2023.111417" class="uri">https://doi.org/10.1016/j.jtbi.2023.111417</a></p></li>
+<li><p>Sachak-Patwa R, Byrne HM, Dyson L, <strong>Thompson RN</strong>. The risk of SARS-CoV-2 outbreaks in low prevalence settings following the removal of travel restrictions. Communications Medicine. 2021 Oct 15;1(1):39. <a href="https://doi.org/10.1038/s43856-021-00038-8" class="uri">https://doi.org/10.1038/s43856-021-00038-8</a></p></li>
 </ul>
 </section>
-<section id="compartmental-models" class="slide level2">
-<h2>Compartmental models</h2>
-<p>Consider the Susceptible-Infectious-Removed (SIR) model</p>
-<div class="cell" data-reveal="true">
+<section id="same-corresponding-author" class="slide level2">
+<h2>Same corresponding author</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="img/robin.jpg"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li><p><a href="https://www.robin-thompson.co.uk/"><strong>Robin Thompson</strong></a></p></li>
+<li><p><em>Associate Professor of Applied Mathematics</em></p></li>
+<li><p>Mathematics Institute, University of Warwick</p></li>
+<li><p>PhD in Mathematical Epidemiology, University of Cambridge</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="compartmental-outbreak-models-1" class="slide level2">
+<h2>Compartmental outbreak models (1)</h2>
+<div class="cell" data-reveal="true" data-fig-width="6">
 <div class="cell-output-display">
 <div>
 <p>
@@ -430,16 +447,22 @@ Ong Phuc Thinh
 </div>
 </div>
 </div>
-<p>In the <strong>deterministic version</strong></p>
 <ul>
 <li><span class="math inline">\(\beta\)</span>: infection rate</li>
 <li><span class="math inline">\(\gamma\)</span>: removal rate</li>
 </ul>
-<p>Randomness in contacts between individuals is important for determining whether or not a major outbreak occurs <span class="math inline">\(\Rightarrow\)</span> <strong>inappropriate</strong> for modelling the start of an outbreak</p>
 </section>
-<section id="stochastic-sir-models" class="slide level2">
-<h2>Stochastic SIR models</h2>
-<div class="cell" data-reveal="true">
+<section id="compartmental-outbreak-models-2" class="slide level2">
+<h2>Compartmental outbreak models (2)</h2>
+<ul>
+<li><p><strong>Randomness</strong> in contacts between individuals is important for determining whether or not a major outbreak occurs</p></li>
+<li><p>Deterministic model is <strong>inappropriate</strong></p></li>
+<li><p>Instead, use stochastic model</p></li>
+</ul>
+</section>
+<section id="stochastic-sir-models-1" class="slide level2">
+<h2>Stochastic SIR models (1)</h2>
+<div class="cell" data-reveal="true" data-fig-width="6">
 <div class="cell-output-display">
 <div>
 <p>
@@ -454,29 +477,143 @@ Ong Phuc Thinh
 </div>
 </div>
 </div>
-<p><strong>Gillespie algorithm</strong> to simulate events from SIR model</p>
+<p><strong>Gillespie algorithm</strong></p>
 <p>2 possible events:</p>
 <ul>
-<li><span class="math inline">\(\mathbb{P}\)</span>(infection event) = <span class="math inline">\(\frac{\beta \frac{I(t)}{N} S(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}\)</span></li>
-<li><span class="math inline">\(\mathbb{P}\)</span>(removal event) = <span class="math inline">\(\frac{\gamma I(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}\)</span></li>
+<li><span class="math inline">\(\mathbb{P}\text{(infection event)} = \frac{\beta \frac{I(t)}{N} S(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}\)</span></li>
+<li><span class="math inline">\(\mathbb{P}\text{(removal event)} = \frac{\gamma I(t)}{\beta \frac{I(t)}{N} S(t) + \gamma I(t)}\)</span></li>
 </ul>
 </section>
-<section id="stochastic-sir-models-1" class="slide level2">
-<h2>Stochastic SIR models</h2>
-<p>Early stage of the outbreak: <span class="math inline">\(I(t) = 1\)</span>, <span class="math inline">\(S(t) \approx N\)</span></p>
-<p><span class="math inline">\(\mathbb{P}\)</span>(infection event) = <span class="math inline">\(\frac{\beta \frac {I(t)} {N} S(t)}{\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\beta} {\beta + \gamma}\)</span></p>
-<p><span class="math inline">\(\mathbb{P}\)</span>(removal event) = <span class="math inline">\(\frac {\gamma I(t)} {\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\gamma} {\beta + \gamma}\)</span></p>
-</section>
 <section id="stochastic-sir-models-2" class="slide level2">
-<h2>Stochastic SIR models</h2>
-<p>Let X ~ Geo(p)</p>
-<p><span class="math display">\[G_X(s) = \mathbb{E}(s^X) = \]</span></p>
+<h2>Stochastic SIR models (2)</h2>
+<p>Early stage:</p>
+<p><span class="math inline">\(I(t) = 1\)</span>, <span class="math inline">\(S(t) \approx N\)</span></p>
+<p><span class="math inline">\(\mathbb{P}\text{(infection event)} = \frac{\beta \frac {I(t)} {N} S(t)}{\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\beta} {\beta + \gamma}\)</span></p>
+<p><span class="math inline">\(\mathbb{P}\text{(removal event)} = \frac {\gamma I(t)} {\beta \frac {I(t)} {N} S(t) + \gamma I(t)} \approx \frac {\gamma} {\beta + \gamma}\)</span></p>
+</section>
+<section id="stochastic-sir-models-3" class="slide level2">
+<h2>Stochastic SIR models (3)</h2>
+<p>Probability that 1 infected host generates k infections is:</p>
+<p><span class="math display">\[\mathbb{P}(X = k) = \left( \frac{\beta}{\beta + \gamma} \right)^k \times \frac{\gamma}{\beta + \gamma}\]</span></p>
+<ul>
+<li><p>First generate k infections</p></li>
+<li><p>Then be removed</p></li>
+<li><p>The number of failures prior to the first success</p></li>
+<li><p>A <strong>geometric distribution</strong> with “success probability” <span class="math inline">\(\frac {\gamma} {\beta + \gamma}\)</span></p></li>
+</ul>
+</section>
+<section id="methods-for-estimating-the-probability-of-a-major-outbreak" class="slide level2">
+<h2>Methods for estimating the probability of a major outbreak</h2>
+<p>Two methods:</p>
+<ul>
+<li><p>Probability generating functions</p></li>
+<li><p>First-step analysis</p></li>
+</ul>
+</section>
+<section id="probability-generating-functions-1" class="slide level2">
+<h2>Probability generating functions (1)</h2>
+<p>The early outbreak can be approximated as a <strong>branching process</strong>:</p>
+<ul>
+<li><p>Each infected individual generates a number of new infections that is drawn from the <strong>offspring distribution</strong></p></li>
+<li><p>Assumption: All infected cases <strong>independently</strong> generate secondary cases (independently draws from the <strong>offspring distribution</strong>)</p></li>
+<li><p>The <strong>offspring distribution</strong> is <strong>geometric distribution</strong> (explained above)</p></li>
+</ul>
+</section>
+<section id="galton-watson-branching-process-1" class="slide level2">
+<h2>Galton-Watson branching process (1)</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="img/branching_process.jpg"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li><p>Ignore the precise times at which infections occur</p></li>
+<li><p>Infections can be separated into discrete generations</p></li>
+<li><p><strong>All infections generated by a specific individual</strong> appear in the <strong>same generation</strong>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="galton-watson-branching-process-2" class="slide level2">
+<h2>Galton-Watson branching process (2)</h2>
+
+<img data-src="img/galton_watson.png" class="r-stretch quarto-figure-center"><ul>
+<li><p>Start with 1 individual at generation n = 0.</p></li>
+<li><p>Each individual lives 1 generation, has <span class="math inline">\(Y\)</span> offspring, and dies.</p></li>
+<li><p><span class="math inline">\(Y\)</span> takes values 0, 1, 2, …, and the probability of producing <span class="math inline">\(k\)</span> offspring is <span class="math inline">\(\mathbb{P}(Y = k) = p_k\)</span>.</p></li>
+</ul>
+</section>
+<section id="galton-watson-branching-process-3" class="slide level2">
+<h2>Galton-Watson branching process (3)</h2>
+
+<img data-src="img/offspring_distr.png" class="r-stretch quarto-figure-center"><ul>
+<li><p>All individuals reproduce <strong>independently</strong>.</p></li>
+<li><p>Individuals 1, 2, …, n have family sizes <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span>, …, <span class="math inline">\(Y_n\)</span>, where each <span class="math inline">\(Y_i\)</span> has <strong>the same offspring distribution</strong> as <span class="math inline">\(Y\)</span>.</p></li>
+</ul>
+</section>
+<section id="probability-generating-functions-2" class="slide level2">
+<h2>Probability generating functions (2)</h2>
+<p>Probability generating function (PGF) is useful to deal with sums and limits of <strong>discrete</strong> random variables.</p>
+<p><span class="math display">\[G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)\]</span></p>
+<p><span class="math display">\[G_X(s) = s^0 \mathbb{P}(X = 0) + s^1 \mathbb{P}(X = 1) + s^2 \mathbb{P}(X = 2) + ...\]</span></p>
+<p>PGF is a function that can <strong>generate all probabilities of the distribution</strong>.</p>
+</section>
+<section id="calculate-probabilities-with-pgf-1" class="slide level2">
+<h2>Calculate probabilities with PGF (1)</h2>
+<p>Let <span class="math inline">\(p_0 = \mathbb{P}(X = 0)\)</span>, <span class="math inline">\(p_1 = \mathbb{P}(X = 1)\)</span>…</p>
+<p><span class="math display">\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...\]</span></p>
+<p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...\)</span></p>
+<p>Because <span class="math inline">\(0^0 = 1\)</span> and <span class="math inline">\(0^1 = 0^2 = 0^3 = ... = 0\)</span></p>
+<p>Therefore <span class="math inline">\(G(0) = p_0\)</span></p>
+</section>
+<section id="calculate-probabilities-with-pgf-2" class="slide level2">
+<h2>Calculate probabilities with PGF (2)</h2>
+<p><span class="math display">\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...\]</span></p>
+<p>First derivative: <span class="math inline">\(G'_X(s) = p_1 + 2 p_2 s + 3 p_3 s^2 + 4 p_4 s^3 ...\)</span></p>
+<p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G'_X(0) = p_1\)</span></p>
+<p>Second derivative: <span class="math inline">\(G''_X(s) = 2 p_2 + 6 p_3 s + 12 p_4 s^2 ...\)</span></p>
+<p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G''_X(0) = 2 p_2\)</span> or <span class="math inline">\(p_2 = \frac{G''_X(0)}{2}\)</span></p>
+</section>
+<section id="pgf-of-geometric-distribution" class="slide level2">
+<h2>PGF of geometric distribution</h2>
+</section>
+<section id="extinction-probability" class="slide level2">
+<h2>Extinction probability</h2>
+<p><span class="math display">\[q_n = \mathbb{P}\text{(extinct by generation n)} = \mathbb{P}(Z_n = 0)\]</span></p>
+<p><span class="math display">\[q = q_\infty = \mathbb{P}\text{(ultimate extinction)} = \mathbb{P}(\lim_{n\to\infty} Z_n) = \lim_{n\to\infty}\mathbb{P}(Z_n) = \lim_{n\to\infty} q_n\]</span></p>
+<p><strong>Theorem</strong></p>
+<p>Let q be the probability of ultimate extinction. Then q is the smallest non-negative solution of the equation <span class="math inline">\(G(q) = q\)</span> (or the fixed point).</p>
 <p><span class="math inline">\(1 + r + r^2 + r^3 + ... = \sum_{x=0}^{\infty} r^x = \frac {1} {1 - r}\)</span> with <span class="math inline">\(|r| &lt; 1\)</span></p>
 <p>Prove this:</p>
 <p><span class="math inline">\(S = 1 + r + r^2 + r^3 + ...\)</span></p>
 <p><span class="math inline">\(rS = r + r^2 + r^3 + r^4 + ...\)</span></p>
 <p><span class="math inline">\(\Rightarrow S - rS = 1 \Leftrightarrow S(1 - r) = 1 \Leftrightarrow S = \frac {1} {1 - r}\)</span></p>
-<!-- ## SInR -->
+</section>
+<section id="why-gq-q-1" class="slide level2">
+<h2>Why <span class="math inline">\(G(q) = q\)</span>? (1)</h2>
+<p><strong>Lemma:</strong> Let <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0)\)</span> (probability of extinction by generation n). Then <span class="math inline">\(q_n = G(q_{n - 1})\)</span></p>
+<p><strong>Proof:</strong></p>
+<p><span class="math inline">\(G_n(s)\)</span> is the PGF of <span class="math inline">\(Z_n\)</span>, then <span class="math inline">\(G_n(0) = \mathbb{P}(Z_n = 0)\)</span></p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math inline">\(G_X(s) = \mathbb{E}(s^X) = \sum_{x=0}^{\infty} s^x \mathbb{P}(X = x)\)</span></p>
+<p><span class="math inline">\(G_X(0) = \mathbb{E}(s^0) = \sum_{x=0}^{\infty} s^0 \mathbb{P}(X = 0) = \mathbb{P}(X = 0)\)</span> (because <span class="math inline">\(s^0 = 1\)</span>)</p>
+</div>
+</div>
+</div>
+<p>So <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0) = G_n(0)\)</span>. Similarly, <span class="math inline">\(q_{n - 1} = \mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)\)</span></p>
+<p>Now <span class="math inline">\(G_n(0) = \underbrace{G(G(G(...G}_\text{n times}(0)...))) = G(G_{n - 1}(0))\)</span></p>
+<p>Because <span class="math inline">\(q_{n - 1} = G_{n - 1}(0)\)</span></p>
+<p>So <span class="math inline">\(q_n = G_n(0) = G(G_{n - 1}(0)) = G(q_{n - 1})\)</span></p>
+</section>
+<section id="why-gq-q-2" class="slide level2">
+<h2>Why <span class="math inline">\(G(q) = q\)</span>? (2)</h2>
+</section>
+<section id="si_nr" class="slide level2">
+<h2><span class="math inline">\(SI_{n}R\)</span></h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -503,11 +640,35 @@ Ong Phuc Thinh
 </details>
 
 </div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section>
+<section id="metrics-for-assessing-the-risk-of-outbreaks" class="title-slide slide level1 center">
+<h1>Metrics for assessing the risk of outbreaks</h1>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><div class="footer footer-default">
+</section>
+<section id="instantaneous-outbreak-risk-ior" class="slide level2">
+<h2>Instantaneous Outbreak Risk (IOR)</h2>
+<p>The risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that <strong>pathogen transmissibility is fixed</strong> at its value when the imported case enters the population</p>
+</section>
+<section id="case-outbreak-risk-cor" class="slide level2">
+<h2>Case Outbreak Risk (COR)</h2>
+</section>
+<section id="simulated-outbreak-risk-sor" class="slide level2">
+<h2>Simulated Outbreak Risk (SOR)</h2>
+<p>Simulating the stochastic model 10,000 times starting from 1 infected individual</p>
+<p>SOR = the proportion of simulations in which the number of infected hosts exceeds a pre-defined threshold value (e.g.&nbsp;100 cases)</p>
+</section>
+<section id="numerical-outbreak-risk-nor" class="slide level2">
+<h2>Numerical Outbreak Risk (NOR)</h2>
+</section>
+<section id="acknowledgements" class="slide level2">
+<h2>Acknowledgements</h2>
+<p>Somya Mehra: for very intuitive explanation of stochastic processes</p>
+
+<div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -562,7 +723,7 @@ Ong Phuc Thinh
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
