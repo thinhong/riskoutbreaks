@@ -455,7 +455,7 @@ Ong Phuc Thinh
 <section id="compartmental-outbreak-models-2" class="slide level2">
 <h2>Compartmental outbreak models (2)</h2>
 <ul>
-<li><p><strong>Randomness</strong> in contacts between individuals is important for determining whether or not a major outbreak occurs</p></li>
+<li><p>One contact can lead to infection or not by <strong>randomness</strong></p></li>
 <li><p>Deterministic model is <strong>inappropriate</strong></p></li>
 <li><p>Instead, use stochastic model</p></li>
 </ul>
@@ -510,8 +510,8 @@ Ong Phuc Thinh
 <li><p>First-step analysis</p></li>
 </ul>
 </section>
-<section id="probability-generating-functions-1" class="slide level2">
-<h2>Probability generating functions (1)</h2>
+<section id="galton-watson-branching-process-1" class="slide level2">
+<h2>Galton-Watson branching process (1)</h2>
 <p>The early outbreak can be approximated as a <strong>branching process</strong>:</p>
 <ul>
 <li><p>Each infected individual generates a number of new infections that is drawn from the <strong>offspring distribution</strong></p></li>
@@ -519,8 +519,8 @@ Ong Phuc Thinh
 <li><p>The <strong>offspring distribution</strong> is <strong>geometric distribution</strong> (explained above)</p></li>
 </ul>
 </section>
-<section id="galton-watson-branching-process-1" class="slide level2">
-<h2>Galton-Watson branching process (1)</h2>
+<section id="galton-watson-branching-process-2" class="slide level2">
+<h2>Galton-Watson branching process (2)</h2>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -536,8 +536,8 @@ Ong Phuc Thinh
 </div>
 </div>
 </section>
-<section id="galton-watson-branching-process-2" class="slide level2">
-<h2>Galton-Watson branching process (2)</h2>
+<section id="galton-watson-branching-process-3" class="slide level2">
+<h2>Galton-Watson branching process (3)</h2>
 
 <img data-src="img/galton_watson.png" class="r-stretch quarto-figure-center"><ul>
 <li><p>Start with 1 individual at generation n = 0.</p></li>
@@ -545,26 +545,92 @@ Ong Phuc Thinh
 <li><p><span class="math inline">\(Y\)</span> takes values 0, 1, 2, …, and the probability of producing <span class="math inline">\(k\)</span> offspring is <span class="math inline">\(\mathbb{P}(Y = k) = p_k\)</span>.</p></li>
 </ul>
 </section>
-<section id="galton-watson-branching-process-3" class="slide level2">
-<h2>Galton-Watson branching process (3)</h2>
+<section id="galton-watson-branching-process-4" class="slide level2">
+<h2>Galton-Watson branching process (4)</h2>
 
 <img data-src="img/offspring_distr.png" class="r-stretch quarto-figure-center"><ul>
 <li><p>All individuals reproduce <strong>independently</strong>.</p></li>
 <li><p>Individuals 1, 2, …, n have family sizes <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(Y_2\)</span>, …, <span class="math inline">\(Y_n\)</span>, where each <span class="math inline">\(Y_i\)</span> has <strong>the same offspring distribution</strong> as <span class="math inline">\(Y\)</span>.</p></li>
 </ul>
 </section>
-<section id="probability-generating-functions-2" class="slide level2">
-<h2>Probability generating functions (2)</h2>
-<p>Probability generating function (PGF) is useful to deal with sums and limits of <strong>discrete</strong> random variables.</p>
+<section id="extinct-by-generation-n" class="slide level2">
+<h2>Extinct by generation n</h2>
+<p>Let <span class="math inline">\(Z_n\)</span> be the size of generation n.</p>
+<p>A branching process extinct by generation n when there is 0 offspring at generation n.</p>
+<p>Let <span class="math inline">\(E_n\)</span> be the event that there is 0 offspring at generation n, or <span class="math inline">\(E_n = \{Z_n = 0\}\)</span></p>
+<p><span class="math display">\[\mathbb{P}\text{(extinct by generation n)} = \mathbb{P}(E_n) = \mathbb{P}(Z_n = 0)\]</span></p>
+</section>
+<section id="ultimate-extinction-1" class="slide level2">
+<h2>Ultimate extinction (1)</h2>
+<p>Ultimate extinction is probability that the population will be extinct by generation n, for any value of n.&nbsp;This is the probability of extinct by gen 0 <strong>or</strong> gen 1 <strong>or</strong> gen 2…</p>
+<p><span class="math display">\[\mathbb{P}\text{(ultimate extinction)} = \mathbb{P} \left( \bigcup_{n = 0}^\infty E_n \right)\]</span></p>
+</section>
+<section id="ultimate-extinction-2" class="slide level2">
+<h2>Ultimate extinction (2)</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="img/union_extinct.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><span class="math inline">\(E_0 \subseteq E_1 \subseteq E_2 \subseteq E_3\)</span>… (<span class="math inline">\(E_0\)</span> is a subset of <span class="math inline">\(E_1\)</span> and so on). We obtain the union when reach <em>generation <span class="math inline">\(\infty\)</span></em></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ultimate-extinction-3" class="slide level2">
+<h2>Ultimate extinction (3)</h2>
+<p><span class="math display">\[\mathbb{P}\text{(ultimate extinction)} = \mathbb{P}(\lim_{n\to\infty} E_n)\]</span></p>
+<p>By the Continuity Theorem: we can take the limit outside</p>
+<p><span class="math display">\[\mathbb{P}(\lim_{n\to\infty} E_n) = \lim_{n\to\infty}\mathbb{P}(E_n) = \lim_{n\to\infty}\mathbb{P}(Z_n = 0)\]</span></p>
+<p>So ultimate extinction is the limit of event “0 offspring at generation n”, when <span class="math inline">\(n \to \infty\)</span>.</p>
+</section>
+<section id="prove-taking-the-limit-out" class="slide level2">
+<h2>Prove: Taking the limit out</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Let <span class="math inline">\(f(x) = x^3\)</span>, <span class="math inline">\(g(x) = x + 2\)</span>, find <span class="math inline">\(lim_{x \to 3} f(g(x))\)</span></p>
+<p>There are two ways to solve this:</p>
+<ol type="1">
+<li>Plug <span class="math inline">\(g(x) = x + 2\)</span> inside of <span class="math inline">\(f(x)\)</span></li>
+</ol>
+<p><span class="math inline">\(f(g(x)) = (x + 2)^3\)</span></p>
+<p><span class="math inline">\(lim_{x \to 3} (x + 2)^3 = 5^3 = 125\)</span></p>
+<ol start="2" type="1">
+<li>Because <span class="math inline">\(f(x)\)</span> is a continuous function, we can put the <span class="math inline">\(lim\)</span> inside of <span class="math inline">\(f(x)\)</span></li>
+</ol>
+<p><span class="math inline">\(lim_{x \to 3} f(g(x)) = f[lim_{x \to 3} g(x)] = f[lim_{x \to 3} (x + 2)] = f(5) = 125\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ultimate-extinction-4" class="slide level2">
+<h2>Ultimate extinction (4)</h2>
+<p>If <span class="math inline">\(G_{Z_n}(s)\)</span> is the PGF of <span class="math inline">\(Z_n\)</span> (number of offspring at generation n).</p>
+<p><span class="math inline">\(G_{Z_n}(s) = s^0 \mathbb{P}(Z_n = 0) + s^1 \mathbb{P}(Z_n = 1) + s^2 \mathbb{P}(Z_n = 2)..\)</span></p>
+<p>We have <span class="math inline">\(G_{Z_n}(0) = \mathbb{P}(Z_n = 0)\)</span>.</p>
+<p>For ease of notation, we write <span class="math inline">\(G_{Z_n}(0) = G_n(0)\)</span>.</p>
+<p>So:</p>
+<p><span class="math display">\[\mathbb{P}\text{(ultimate extinction)} = \lim_{n\to\infty} G_n(0)\]</span></p>
+</section>
+<section id="ultimate-extinction-5" class="slide level2">
+<h2>Ultimate extinction (5)</h2>
+<p><strong>Theorem</strong></p>
+<p>The ultimate extinction probability q is the smallest non-negative solution of the equation <span class="math inline">\(G_X(q) = q\)</span> (or the fixed point). <span class="math inline">\(G_X(q)\)</span> is the probability generating function.</p>
+</section>
+<section id="probability-generating-function" class="slide level2">
+<h2>Probability generating function</h2>
+
+<img data-src="img/offspring_distr.png" class="r-stretch quarto-figure-center"><p>PGF is a function that can <strong>generate all probabilities of the distribution</strong>.</p>
 <p><span class="math display">\[G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)\]</span></p>
 <p><span class="math display">\[G_X(s) = s^0 \mathbb{P}(X = 0) + s^1 \mathbb{P}(X = 1) + s^2 \mathbb{P}(X = 2) + ...\]</span></p>
-<p>PGF is a function that can <strong>generate all probabilities of the distribution</strong>.</p>
 </section>
 <section id="calculate-probabilities-with-pgf-1" class="slide level2">
 <h2>Calculate probabilities with PGF (1)</h2>
 <p>Let <span class="math inline">\(p_0 = \mathbb{P}(X = 0)\)</span>, <span class="math inline">\(p_1 = \mathbb{P}(X = 1)\)</span>…</p>
 <p><span class="math display">\[G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...\]</span></p>
-<p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...\)</span></p>
+<p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G_X(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...\)</span></p>
 <p>Because <span class="math inline">\(0^0 = 1\)</span> and <span class="math inline">\(0^1 = 0^2 = 0^3 = ... = 0\)</span></p>
 <p>Therefore <span class="math inline">\(G(0) = p_0\)</span></p>
 </section>
@@ -576,44 +642,195 @@ Ong Phuc Thinh
 <p>Second derivative: <span class="math inline">\(G''_X(s) = 2 p_2 + 6 p_3 s + 12 p_4 s^2 ...\)</span></p>
 <p>If <span class="math inline">\(s = 0\)</span>, then <span class="math inline">\(G''_X(0) = 2 p_2\)</span> or <span class="math inline">\(p_2 = \frac{G''_X(0)}{2}\)</span></p>
 </section>
-<section id="pgf-of-geometric-distribution" class="slide level2">
-<h2>PGF of geometric distribution</h2>
+<section id="pgf-of-geometric-distribution-1" class="slide level2">
+<h2>PGF of geometric distribution (1)</h2>
+<p>In the SIR model, the offspring distribution is a <strong>geometric distribution</strong> with “success probability” <span class="math inline">\(\frac {\gamma} {\beta + \gamma}\)</span></p>
+<p><span class="math display">\[G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)\]</span></p>
+<p>Let <span class="math inline">\(X \sim \text{Geometric(p)}\)</span> with <span class="math inline">\(p\)</span> is the success probability</p>
+<p>Then the PMF <span class="math inline">\(\mathbb{P}(X = x) = (1 - p)^xp\)</span> (having <span class="math inline">\(x\)</span> failures before success)</p>
 </section>
-<section id="extinction-probability" class="slide level2">
-<h2>Extinction probability</h2>
-<p><span class="math display">\[q_n = \mathbb{P}\text{(extinct by generation n)} = \mathbb{P}(Z_n = 0)\]</span></p>
-<p><span class="math display">\[q = q_\infty = \mathbb{P}\text{(ultimate extinction)} = \mathbb{P}(\lim_{n\to\infty} Z_n) = \lim_{n\to\infty}\mathbb{P}(Z_n) = \lim_{n\to\infty} q_n\]</span></p>
-<p><strong>Theorem</strong></p>
-<p>Let q be the probability of ultimate extinction. Then q is the smallest non-negative solution of the equation <span class="math inline">\(G(q) = q\)</span> (or the fixed point).</p>
-<p><span class="math inline">\(1 + r + r^2 + r^3 + ... = \sum_{x=0}^{\infty} r^x = \frac {1} {1 - r}\)</span> with <span class="math inline">\(|r| &lt; 1\)</span></p>
-<p>Prove this:</p>
-<p><span class="math inline">\(S = 1 + r + r^2 + r^3 + ...\)</span></p>
-<p><span class="math inline">\(rS = r + r^2 + r^3 + r^4 + ...\)</span></p>
-<p><span class="math inline">\(\Rightarrow S - rS = 1 \Leftrightarrow S(1 - r) = 1 \Leftrightarrow S = \frac {1} {1 - r}\)</span></p>
+<section id="pgf-of-geometric-distribution-2" class="slide level2">
+<h2>PGF of geometric distribution (2)</h2>
+<p><span class="math inline">\(G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)\)</span></p>
+<p><span class="math inline">\(= \sum_{x = 0}^\infty s^x (1 - p)^x p = p \sum_{x = 0}^\infty [s(1 - p)]^x\)</span></p>
+<p><span class="math inline">\(= p\{[s(1 - p)]^0 + [s(1 - p)]^1 + [s(1 - p)]^2 + ...\}\)</span></p>
+<p><span class="math inline">\(= p[1 + s(1 - p) + [s(1 - p)]^2 + ...]\)</span></p>
 </section>
-<section id="why-gq-q-1" class="slide level2">
-<h2>Why <span class="math inline">\(G(q) = q\)</span>? (1)</h2>
-<p><strong>Lemma:</strong> Let <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0)\)</span> (probability of extinction by generation n). Then <span class="math inline">\(q_n = G(q_{n - 1})\)</span></p>
-<p><strong>Proof:</strong></p>
-<p><span class="math inline">\(G_n(s)\)</span> is the PGF of <span class="math inline">\(Z_n\)</span>, then <span class="math inline">\(G_n(0) = \mathbb{P}(Z_n = 0)\)</span></p>
+<section id="pgf-of-geometric-distribution-3" class="slide level2">
+<h2>PGF of geometric distribution (3)</h2>
+<p><span class="math inline">\(G_X(s) = p[1 + s(1 - p) + [s(1 - p)]^2 + ...]\)</span></p>
+<p>We have: <span class="math inline">\(1 + r + r^2 + r^3 + ... = \frac {1} {1 - r}\)</span> with <span class="math inline">\(|r| &lt; 1\)</span></p>
 <div class="callout callout-note no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p><span class="math inline">\(G_X(s) = \mathbb{E}(s^X) = \sum_{x=0}^{\infty} s^x \mathbb{P}(X = x)\)</span></p>
-<p><span class="math inline">\(G_X(0) = \mathbb{E}(s^0) = \sum_{x=0}^{\infty} s^0 \mathbb{P}(X = 0) = \mathbb{P}(X = 0)\)</span> (because <span class="math inline">\(s^0 = 1\)</span>)</p>
+<p><span class="math inline">\(A = 1 + r + r^2 + r^3 + ...\)</span></p>
+<p><span class="math inline">\(rA = r + r^2 + r^3 + r^4 + ...\)</span></p>
+<p><span class="math inline">\(\Rightarrow A - rA = 1 \Leftrightarrow A(1 - r) = 1 \Leftrightarrow A = \frac {1} {1 - r}\)</span></p>
 </div>
 </div>
 </div>
-<p>So <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0) = G_n(0)\)</span>. Similarly, <span class="math inline">\(q_{n - 1} = \mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)\)</span></p>
+<p>Here <span class="math inline">\(r = s(1 - p) \Rightarrow G_X(s) = \frac{p}{1 - s(1 - p)}\)</span></p>
+</section>
+<section id="ultimate-extinction-of-sir-models-1" class="slide level2">
+<h2>Ultimate extinction of SIR models (1)</h2>
+<p>In the SIR model, the offspring distribution is a <strong>geometric distribution</strong> with “success probability” <span class="math inline">\(\frac {\gamma} {\beta + \gamma}\)</span></p>
+<p>Also for SIR model: <span class="math inline">\(R_0 = \frac{\beta}{\gamma} \Rightarrow \gamma = \frac{\beta}{R_0}\)</span></p>
+<p>Plug <span class="math inline">\(\gamma = \frac{\beta}{R_0}\)</span> to the success probability</p>
+<p><span class="math inline">\(\frac {\gamma} {\beta + \gamma} = \frac{\frac{\beta}{R_0}}{\beta + \frac{\beta}{R_0}} = \frac{\frac{\beta}{R_0}}{\frac{\beta(R_0 + 1)}{R_0}} = \frac{1}{R_0 + 1}\)</span></p>
+</section>
+<section id="ultimate-extinction-of-sir-models-2" class="slide level2">
+<h2>Ultimate extinction of SIR models (2)</h2>
+<p>Now the “success probability” is <span class="math inline">\(p = \frac{1}{R_0 + 1}\)</span></p>
+<p>The PGF of geometric distribution is <span class="math inline">\(G_X(s) = \frac{p}{1 - s(1 - p)}\)</span></p>
+<p><span class="math inline">\(G_X(s) = \frac{\frac{1}{R_0 + 1}}{1 - s \left( 1 - \frac{1}{R_0 + 1} \right)} = \frac{\frac{1}{R_0 + 1}}{\frac{R_0 + 1 - s(R_0 + 1 - 1)}{R_0 + 1}} = \frac{1}{R_0 + 1 - sR_0}\)</span></p>
+<p>Ultimate extinction probability <span class="math inline">\(q\)</span> is the solution of <span class="math inline">\(G_X(q) = q\)</span></p>
+<p><span class="math inline">\(\Leftrightarrow \frac{1}{R_0 + 1 - qR_0} = q\)</span></p>
+<p><span class="math inline">\(\Leftrightarrow R_0q^2 - (R_0 + 1)q + 1 = 0\)</span></p>
+</section>
+<section id="ultimate-extinction-of-sir-models-3" class="slide level2">
+<h2>Ultimate extinction of SIR models (3)</h2>
+<p><span class="math display">\[R_0q^2 - (R_0 + 1)q + 1 = 0\]</span></p>
+<p>The solutions are <span class="math inline">\(q = 1\)</span> and <span class="math inline">\(q = \frac{1}{R_0}\)</span></p>
+<p><strong>The risk of outbreaks</strong> is:</p>
+<p><span class="math display">\[1 - \mathbb{P}\text{(ultimate extinction)} = 1 - q = 1 - \frac{1}{R_0}\]</span></p>
+</section>
+<section id="why-gq-q" class="slide level2">
+<h2>Why <span class="math inline">\(G(q) = q\)</span>?</h2>
+<p><strong>Lemma:</strong> Let <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0)\)</span> (probability of extinction by generation n). Then <span class="math inline">\(q_n = G(q_{n - 1})\)</span></p>
+<p><strong>Proof:</strong></p>
+<p><span class="math inline">\(G_n(s)\)</span> is the PGF of <span class="math inline">\(Z_n\)</span>, then <span class="math inline">\(G_n(0) = \mathbb{P}(Z_n = 0)\)</span>. So <span class="math inline">\(q_n = \mathbb{P}(Z_n = 0) = G_n(0)\)</span>. Similarly, <span class="math inline">\(q_{n - 1} = \mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)\)</span></p>
 <p>Now <span class="math inline">\(G_n(0) = \underbrace{G(G(G(...G}_\text{n times}(0)...))) = G(G_{n - 1}(0))\)</span></p>
 <p>Because <span class="math inline">\(q_{n - 1} = G_{n - 1}(0)\)</span></p>
 <p>So <span class="math inline">\(q_n = G_n(0) = G(G_{n - 1}(0)) = G(q_{n - 1})\)</span></p>
 </section>
-<section id="why-gq-q-2" class="slide level2">
-<h2>Why <span class="math inline">\(G(q) = q\)</span>? (2)</h2>
+<section id="summary-the-pgf-method" class="slide level2">
+<h2>Summary: the PGF method</h2>
+<ol type="1">
+<li><p>Define your stochastic model / branching process</p></li>
+<li><p>Derive the offspring distribution</p></li>
+<li><p>Get the PGF <span class="math inline">\(G_X(s)\)</span> of the offspring distribution</p></li>
+<li><p>Solve <span class="math inline">\(G_X(q) = q\)</span> for the ultimate extinction probability <span class="math inline">\(q\)</span></p></li>
+<li><p><strong>The risk of outbreaks</strong> is <span class="math inline">\(1 - q\)</span></p></li>
+</ol>
 </section>
-<section id="si_nr" class="slide level2">
-<h2><span class="math inline">\(SI_{n}R\)</span></h2>
+<section id="first-step-analysis-1" class="slide level2">
+<h2>First-step analysis (1)</h2>
+<p>Conditioning on the first event.</p>
+
+<img data-src="img/galton_watson.png" class="r-stretch quarto-figure-center"><p>The first event can only be either (i) an infection or (ii) a removal.</p>
+</section>
+<section id="first-step-analysis-2" class="slide level2">
+<h2>First-step analysis (2)</h2>
+<p><span class="math inline">\(\mathbb{P}\text{(no outbreak)} = \mathbb{P}(\text{no outbreak} \cap \text{1st is infection})\)</span></p>
+<p><span class="math inline">\(+ \mathbb{P}(\text{no outbreak} \cap \text{1st is removal})\)</span></p>
+<p><span class="math inline">\(= \mathbb{P}(\text{no outbreak | 1st is infection}) \times \mathbb{P}(\text{1st is infection})\)</span></p>
+<p><span class="math inline">\(+ \mathbb{P}(\text{no outbreak | 1st is removal}) \times \mathbb{P}(\text{1st is removal})\)</span></p>
+</section>
+<section id="first-step-analysis-3" class="slide level2">
+<h2>First-step analysis (3)</h2>
+<p>Let call:</p>
+<ul>
+<li><p><span class="math inline">\(q_0 = \mathbb{P}(\text{no outbreak | 0 infection}) = 1\)</span></p></li>
+<li><p><span class="math inline">\(q_1 = \mathbb{P}(\text{no outbreak | 1 infection})\)</span></p></li>
+<li><p><span class="math inline">\(q_2 = \mathbb{P}(\text{no outbreak | 2 infections})\)</span></p></li>
+</ul>
+</section>
+<section id="first-step-analysis-4" class="slide level2">
+<h2>First-step analysis (4)</h2>
+
+<img data-src="img/galton_watson.png" class="r-stretch quarto-figure-center"><p>Our model is the branching process start from 1 infection, so we are computing <span class="math inline">\(q_1\)</span>.</p>
+</section>
+<section id="first-step-analysis-5" class="slide level2">
+<h2>First-step analysis (5)</h2>
+<p><span class="math inline">\(\mathbb{P}\text{(no outbreak)} =\)</span></p>
+<p><span class="math inline">\(= \mathbb{P}(\text{no outbreak | 1st is infection}) \times \mathbb{P}(\text{1st is infection})\)</span></p>
+<p><span class="math inline">\(+ \mathbb{P}(\text{no outbreak | 1st is removal}) \times \mathbb{P}(\text{1st is removal})\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{P}\text{(no outbreak)} = q_1\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{P}(\text{no outbreak | 1st is infection}) = q_2\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{P}(\text{1st is infection}) = \frac{\beta}{\beta + \gamma}\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{P}(\text{no outbreak | 1st is removal}) = q_0 = 1\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb{P}(\text{1st is removal}) = \frac{\gamma}{\beta + \gamma}\)</span></p></li>
+</ul>
+</section>
+<section id="first-step-analysis-6" class="slide level2">
+<h2>First-step analysis (6)</h2>
+<p><span class="math display">\[q_1 = \frac{\beta}{\beta + \gamma} q_2 + \frac{\gamma}{\beta + \gamma}\]</span></p>
+<p>In branching process, individuals are independently generates new infections, so <span class="math inline">\(q_2 = q_1^2\)</span>.</p>
+<p><span class="math display">\[q_1 = \frac{\beta}{\beta + \gamma} q_1^2 + \frac{\gamma}{\beta + \gamma}\]</span></p>
+<p>Solve this we also get <span class="math inline">\(q_1 = 1\)</span> or <span class="math inline">\(q_1 = \frac{\gamma}{\beta} = \frac{1}{R_0}\)</span>.</p>
+</section>
+<section>
+<section id="more-complex-epidemiological-models" class="title-slide slide level1 center">
+<h1>More complex epidemiological models</h1>
+
+</section>
+<section id="gamma-distributed-infectious-period" class="slide level2">
+<h2>Gamma distributed infectious period</h2>
+<p>Using constant removal rate assume that the infectious period is <strong>exponentially distributed</strong>.</p>
+<div class="cell" data-reveal="true" data-fig-width="4">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
+  S["S(t)"] --βI/N--&gt; I["I(t)"]
+  I --γ--&gt; R["R(t)"]
+</pre>
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+<p>We split the I compartment into n subcompartments, as a <strong>gamma distribution</strong> with shape n and rate <span class="math inline">\(\lambda\)</span> (Erlang distribution) can be thought of as the <strong>sum of n exponential distributions</strong> each with rate <span class="math inline">\(\lambda\)</span>.</p>
+<div class="cell" data-reveal="true" data-fig-width="8">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-4">flowchart LR
+  S["S(t)"] --βI/N--&gt; I1["I1(t)"]
+  I1 --γnI1--&gt; I2["I2(t)"]
+  I2 --γnI2--&gt; I3["..."]
+  I3 --&gt; In["In(t)"]
+  In --γnIn--&gt; R["R(t)"]
+</pre>
+<div id="mermaid-tooltip-4" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-si_nr-model-1" class="slide level2">
+<h2>The <span class="math inline">\(SI_{n}R\)</span> model (1)</h2>
+<ol type="1">
+<li><p>Define your stochastic model / branching process: <span class="math inline">\(SI_{n}R\)</span> model</p></li>
+<li><p>Derive the offspring distribution</p></li>
+</ol>
+<ul>
+<li><p>The offspring distribution is also a <strong>geometric distribution</strong> with success probability <span class="math inline">\(\frac{1}{\frac{R_0}{n} + 1}\)</span>.</p></li>
+<li><p>Because the host is expected to spend 1/n infectious period in each of the infectious compartments.</p></li>
+</ul>
+</section>
+<section id="the-si_nr-model-2" class="slide level2">
+<h2>The <span class="math inline">\(SI_{n}R\)</span> model (2)</h2>
+<ol start="3" type="1">
+<li>Get the PGF <span class="math inline">\(G_X(s)\)</span> of the offspring distribution</li>
+</ol>
+<ul>
+<li><span class="math inline">\(G_X(s) = \left( \frac{1}{\frac{R_0}{n} + 1 - s \frac{R_0}{n}} \right)^n\)</span></li>
+</ul>
+<ol start="4" type="1">
+<li>Solve <span class="math inline">\(G_X(q) = q\)</span> for the ultimate extinction probability <span class="math inline">\(q\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(q = \left( \frac{1}{\frac{R_0}{n} + 1 - q \frac{R_0}{n}} \right)^n\)</span></li>
+</ul>
+</section>
+<section id="the-si_nr-model" class="slide level2">
+<h2>The <span class="math inline">\(SI_{n}R\)</span> model</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -640,7 +857,7 @@ Ong Phuc Thinh
 </details>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="metrics-for-assessing-the-risk-of-outbreaks" class="title-slide slide level1 center">
 <h1>Metrics for assessing the risk of outbreaks</h1>

@@ -48,7 +48,7 @@ flowchart LR
 
 ## Compartmental outbreak models (2)
 
-* **Randomness** in contacts between individuals is important for determining whether or not a major outbreak occurs
+* One contact can lead to infection or not by **randomness**
 
 * Deterministic model is **inappropriate**
 
@@ -103,7 +103,7 @@ Two methods:
 
 * First-step analysis
 
-## Probability generating functions (1)
+## Galton-Watson branching process (1)
 
 The early outbreak can be approximated as a **branching process**:
 
@@ -113,7 +113,7 @@ The early outbreak can be approximated as a **branching process**:
 
 * The **offspring distribution** is **geometric distribution** (explained above)
 
-## Galton-Watson branching process (1)
+## Galton-Watson branching process (2)
 
 ::: {layout-ncol=2}
 
@@ -127,7 +127,7 @@ The early outbreak can be approximated as a **branching process**:
 
 :::
 
-## Galton-Watson branching process (2)
+## Galton-Watson branching process (3)
 
 ![](img/galton_watson.png){fig-align="center"}
 
@@ -137,7 +137,7 @@ The early outbreak can be approximated as a **branching process**:
 
 * $Y$ takes values 0, 1, 2, ..., and the probability of producing $k$ offspring is $\mathbb{P}(Y = k) = p_k$.
 
-## Galton-Watson branching process (3)
+## Galton-Watson branching process (4)
 
 ![](img/offspring_distr.png){fig-align="center"}
 
@@ -145,15 +145,91 @@ The early outbreak can be approximated as a **branching process**:
 
 * Individuals 1, 2, ..., n have family sizes $Y_1$, $Y_2$, ..., $Y_n$, where each $Y_i$ has **the same offspring distribution** as $Y$.
 
-## Probability generating functions (2)
+## Extinct by generation n
 
-Probability generating function (PGF) is useful to deal with sums and limits of **discrete** random variables.
+Let $Z_n$ be the size of generation n.
+
+A branching process extinct by generation n when there is 0 offspring at generation n.
+
+Let $E_n$ be the event that there is 0 offspring at generation n, or $E_n = \{Z_n = 0\}$
+
+$$\mathbb{P}\text{(extinct by generation n)} = \mathbb{P}(E_n) = \mathbb{P}(Z_n = 0)$$
+
+## Ultimate extinction (1)
+
+Ultimate extinction is probability that the population will be extinct by generation n, for any value of n. This is the probability of extinct by gen 0 **or** gen 1 **or** gen 2...
+
+$$\mathbb{P}\text{(ultimate extinction)} = \mathbb{P} \left( \bigcup_{n = 0}^\infty E_n \right)$$
+
+## Ultimate extinction (2)
+
+::: {layout-ncol=2}
+
+![](img/union_extinct.png)
+
+$E_0 \subseteq E_1 \subseteq E_2 \subseteq E_3$... ($E_0$ is a subset of $E_1$ and so on). We obtain the union when reach *generation $\infty$*
+
+:::
+
+## Ultimate extinction (3)
+
+$$\mathbb{P}\text{(ultimate extinction)} = \mathbb{P}(\lim_{n\to\infty} E_n)$$
+
+By the Continuity Theorem: we can take the limit outside
+
+$$\mathbb{P}(\lim_{n\to\infty} E_n) = \lim_{n\to\infty}\mathbb{P}(E_n) = \lim_{n\to\infty}\mathbb{P}(Z_n = 0)$$
+
+So ultimate extinction is the limit of event "0 offspring at generation n", when $n \to \infty$.
+
+## Prove: Taking the limit out
+
+::: {.callout-note}
+
+Let $f(x) = x^3$, $g(x) = x + 2$, find $lim_{x \to 3} f(g(x))$
+
+There are two ways to solve this:
+
+1. Plug $g(x) = x + 2$ inside of $f(x)$ 
+
+$f(g(x)) = (x + 2)^3$
+
+$lim_{x \to 3} (x + 2)^3 = 5^3 = 125$
+
+2. Because $f(x)$ is a continuous function, we can put the $lim$ inside of $f(x)$
+
+$lim_{x \to 3} f(g(x)) = f[lim_{x \to 3} g(x)] = f[lim_{x \to 3} (x + 2)] = f(5) = 125$
+
+:::
+
+## Ultimate extinction (4)
+
+If $G_{Z_n}(s)$ is the PGF of $Z_n$ (number of offspring at generation n). 
+
+$G_{Z_n}(s) = s^0 \mathbb{P}(Z_n = 0) + s^1 \mathbb{P}(Z_n = 1) + s^2 \mathbb{P}(Z_n = 2)..$
+
+We have $G_{Z_n}(0) = \mathbb{P}(Z_n = 0)$.
+
+For ease of notation, we write $G_{Z_n}(0) = G_n(0)$.
+
+So:
+
+$$\mathbb{P}\text{(ultimate extinction)} = \lim_{n\to\infty} G_n(0)$$
+
+## Ultimate extinction (5)
+
+**Theorem**
+
+The ultimate extinction probability q is the smallest non-negative solution of the equation $G_X(q) = q$ (or the fixed point). $G_X(q)$ is the probability generating function.
+
+## Probability generating function
+
+![](img/offspring_distr.png){fig-align="center"}
+
+PGF is a function that can **generate all probabilities of the distribution**.
 
 $$G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)$$
 
 $$G_X(s) = s^0 \mathbb{P}(X = 0) + s^1 \mathbb{P}(X = 1) + s^2 \mathbb{P}(X = 2) + ...$$
-
-PGF is a function that can **generate all probabilities of the distribution**.
 
 ## Calculate probabilities with PGF (1)
 
@@ -161,7 +237,7 @@ Let $p_0 = \mathbb{P}(X = 0)$, $p_1 = \mathbb{P}(X = 1)$...
 
 $$G_X(s) = s^0 p_0 + s^1 p_1 + s^2 p_2 + s^3 p_3 + s^4 p_4 ...$$
 
-If $s = 0$, then $G(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...$
+If $s = 0$, then $G_X(0) = 0^0 p_0 + 0^1 p_1 + 0^2 p_2 + 0^3 p_3 + ...$
 
 Because $0^0 = 1$ and $0^1 = 0^2 = 0^3 = ... = 0$
 
@@ -179,45 +255,85 @@ Second derivative: $G''_X(s) = 2 p_2 + 6 p_3 s + 12 p_4 s^2 ...$
 
 If $s = 0$, then $G''_X(0) = 2 p_2$ or $p_2 = \frac{G''_X(0)}{2}$
 
-## PGF of geometric distribution
+## PGF of geometric distribution (1)
 
+In the SIR model, the offspring distribution is a **geometric distribution** with "success probability" $\frac {\gamma} {\beta + \gamma}$
 
+$$G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)$$
 
-## Extinction probability
+Let $X \sim \text{Geometric(p)}$ with $p$ is the success probability
 
-$$q_n = \mathbb{P}\text{(extinct by generation n)} = \mathbb{P}(Z_n = 0)$$
+Then the PMF $\mathbb{P}(X = x) = (1 - p)^xp$ (having $x$ failures before success)
 
-$$q = q_\infty = \mathbb{P}\text{(ultimate extinction)} = \mathbb{P}(\lim_{n\to\infty} Z_n) = \lim_{n\to\infty}\mathbb{P}(Z_n) = \lim_{n\to\infty} q_n$$
+## PGF of geometric distribution (2)
 
-**Theorem**
+$G_X(s) = \mathbb{E}(s^X) = \sum_{x = 0}^\infty s^x \mathbb{P}(X = x)$
 
-Let q be the probability of ultimate extinction. Then q is the smallest non-negative solution of the equation $G(q) = q$ (or the fixed point).
+$= \sum_{x = 0}^\infty s^x (1 - p)^x p = p \sum_{x = 0}^\infty [s(1 - p)]^x$
 
-$1 + r + r^2 + r^3 + ... = \sum_{x=0}^{\infty} r^x = \frac {1} {1 - r}$ with $|r| < 1$
+$= p\{[s(1 - p)]^0 + [s(1 - p)]^1 + [s(1 - p)]^2 + ...\}$
 
-Prove this:
+$= p[1 + s(1 - p) + [s(1 - p)]^2 + ...]$
 
-$S = 1 + r + r^2 + r^3 + ...$
+## PGF of geometric distribution (3)
 
-$rS = r + r^2 + r^3 + r^4 + ...$
+$G_X(s) = p[1 + s(1 - p) + [s(1 - p)]^2 + ...]$
 
-$\Rightarrow S - rS = 1 \Leftrightarrow S(1 - r) = 1 \Leftrightarrow S = \frac {1} {1 - r}$
+We have: $1 + r + r^2 + r^3 + ... = \frac {1} {1 - r}$ with $|r| < 1$
 
-## Why $G(q) = q$? (1)
+::: {.callout-note}
+
+$A = 1 + r + r^2 + r^3 + ...$
+
+$rA = r + r^2 + r^3 + r^4 + ...$
+
+$\Rightarrow A - rA = 1 \Leftrightarrow A(1 - r) = 1 \Leftrightarrow A = \frac {1} {1 - r}$
+
+:::
+
+Here $r = s(1 - p) \Rightarrow G_X(s) = \frac{p}{1 - s(1 - p)}$
+
+## Ultimate extinction of SIR models (1)
+
+In the SIR model, the offspring distribution is a **geometric distribution** with "success probability" $\frac {\gamma} {\beta + \gamma}$
+
+Also for SIR model: $R_0 = \frac{\beta}{\gamma} \Rightarrow \gamma = \frac{\beta}{R_0}$
+
+Plug $\gamma = \frac{\beta}{R_0}$ to the success probability
+
+$\frac {\gamma} {\beta + \gamma} = \frac{\frac{\beta}{R_0}}{\beta + \frac{\beta}{R_0}} = \frac{\frac{\beta}{R_0}}{\frac{\beta(R_0 + 1)}{R_0}} = \frac{1}{R_0 + 1}$
+
+## Ultimate extinction of SIR models (2)
+
+Now the "success probability" is $p = \frac{1}{R_0 + 1}$
+
+The PGF of geometric distribution is $G_X(s) = \frac{p}{1 - s(1 - p)}$
+
+$G_X(s) = \frac{\frac{1}{R_0 + 1}}{1 - s \left( 1 - \frac{1}{R_0 + 1} \right)} = \frac{\frac{1}{R_0 + 1}}{\frac{R_0 + 1 - s(R_0 + 1 - 1)}{R_0 + 1}} = \frac{1}{R_0 + 1 - sR_0}$
+
+Ultimate extinction probability $q$ is the solution of $G_X(q) = q$
+
+$\Leftrightarrow \frac{1}{R_0 + 1 - qR_0} = q$
+
+$\Leftrightarrow R_0q^2 - (R_0 + 1)q + 1 = 0$
+
+## Ultimate extinction of SIR models (3)
+
+$$R_0q^2 - (R_0 + 1)q + 1 = 0$$
+
+The solutions are $q = 1$ and $q = \frac{1}{R_0}$
+
+**The risk of outbreaks** is:
+
+$$1 - \mathbb{P}\text{(ultimate extinction)} = 1 - q = 1 - \frac{1}{R_0}$$
+
+## Why $G(q) = q$?
 
 **Lemma:** Let $q_n = \mathbb{P}(Z_n = 0)$ (probability of extinction by generation n). Then $q_n = G(q_{n - 1})$
 
 **Proof:**
 
-$G_n(s)$ is the PGF of $Z_n$, then $G_n(0) = \mathbb{P}(Z_n = 0)$
-
-::: {.callout-note collapse=true}
-$G_X(s) = \mathbb{E}(s^X) = \sum_{x=0}^{\infty} s^x \mathbb{P}(X = x)$
-
-$G_X(0) = \mathbb{E}(s^0) = \sum_{x=0}^{\infty} s^0 \mathbb{P}(X = 0) = \mathbb{P}(X = 0)$ (because $s^0 = 1$)
-:::
-
-So $q_n = \mathbb{P}(Z_n = 0) = G_n(0)$. Similarly, $q_{n - 1} = \mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)$
+$G_n(s)$ is the PGF of $Z_n$, then $G_n(0) = \mathbb{P}(Z_n = 0)$. So $q_n = \mathbb{P}(Z_n = 0) = G_n(0)$. Similarly, $q_{n - 1} = \mathbb{P}(Z_{n - 1} = 0) = G_{n - 1}(0)$
 
 Now $G_n(0) = \underbrace{G(G(G(...G}_\text{n times}(0)...))) = G(G_{n - 1}(0))$
 
@@ -225,11 +341,128 @@ Because $q_{n - 1} = G_{n - 1}(0)$
 
 So $q_n = G_n(0) = G(G_{n - 1}(0)) = G(q_{n - 1})$
 
-## Why $G(q) = q$? (2)
+## Summary: the PGF method
 
+1. Define your stochastic model / branching process
 
+2. Derive the offspring distribution
 
-## $SI_{n}R$
+3. Get the PGF $G_X(s)$ of the offspring distribution
+
+4. Solve $G_X(q) = q$ for the ultimate extinction probability $q$
+
+5. **The risk of outbreaks** is $1 - q$
+
+## First-step analysis (1)
+
+Conditioning on the first event.
+
+![](img/galton_watson.png){fig-align="center"}
+
+The first event can only be either (i) an infection or (ii) a removal.
+
+## First-step analysis (2)
+
+$\mathbb{P}\text{(no outbreak)} = \mathbb{P}(\text{no outbreak} \cap \text{1st is infection})$
+
+$+ \mathbb{P}(\text{no outbreak} \cap \text{1st is removal})$
+
+$= \mathbb{P}(\text{no outbreak | 1st is infection}) \times \mathbb{P}(\text{1st is infection})$
+
+$+ \mathbb{P}(\text{no outbreak | 1st is removal}) \times \mathbb{P}(\text{1st is removal})$
+
+## First-step analysis (3)
+
+Let call:
+
+* $q_0 = \mathbb{P}(\text{no outbreak | 0 infection}) = 1$
+
+* $q_1 = \mathbb{P}(\text{no outbreak | 1 infection})$
+
+* $q_2 = \mathbb{P}(\text{no outbreak | 2 infections})$
+
+## First-step analysis (4)
+
+![](img/galton_watson.png){fig-align="center"}
+
+Our model is the branching process start from 1 infection, so we are computing $q_1$.
+
+## First-step analysis (5)
+
+$\mathbb{P}\text{(no outbreak)} =$
+
+$= \mathbb{P}(\text{no outbreak | 1st is infection}) \times \mathbb{P}(\text{1st is infection})$
+
+$+ \mathbb{P}(\text{no outbreak | 1st is removal}) \times \mathbb{P}(\text{1st is removal})$
+
+* $\mathbb{P}\text{(no outbreak)} = q_1$
+
+* $\mathbb{P}(\text{no outbreak | 1st is infection}) = q_2$
+
+* $\mathbb{P}(\text{1st is infection}) = \frac{\beta}{\beta + \gamma}$
+
+* $\mathbb{P}(\text{no outbreak | 1st is removal}) = q_0 = 1$
+
+* $\mathbb{P}(\text{1st is removal}) = \frac{\gamma}{\beta + \gamma}$
+
+## First-step analysis (6)
+
+$$q_1 = \frac{\beta}{\beta + \gamma} q_2 + \frac{\gamma}{\beta + \gamma}$$
+
+In branching process, individuals are independently generates new infections, so $q_2 = q_1^2$.
+
+$$q_1 = \frac{\beta}{\beta + \gamma} q_1^2 + \frac{\gamma}{\beta + \gamma}$$
+
+Solve this we also get $q_1 = 1$ or $q_1 = \frac{\gamma}{\beta} = \frac{1}{R_0}$.
+
+# More complex epidemiological models
+
+## Gamma distributed infectious period
+
+Using constant removal rate assume that the infectious period is **exponentially distributed**.
+
+```{mermaid}
+%%| fig-width: 4
+
+flowchart LR
+  S["S(t)"] --βI/N--> I["I(t)"]
+  I --γ--> R["R(t)"]
+```
+
+We split the I compartment into n subcompartments, as a **gamma distribution** with shape n and rate $\lambda$ (Erlang distribution) can be thought of as the **sum of n exponential distributions** each with rate $\lambda$.
+
+```{mermaid}
+%%| fig-width: 8
+
+flowchart LR
+  S["S(t)"] --βI/N--> I1["I1(t)"]
+  I1 --γnI1--> I2["I2(t)"]
+  I2 --γnI2--> I3["..."]
+  I3 --> In["In(t)"]
+  In --γnIn--> R["R(t)"]
+```
+
+## The $SI_{n}R$ model (1)
+
+1. Define your stochastic model / branching process: $SI_{n}R$ model
+
+2. Derive the offspring distribution
+
+* The offspring distribution is also a **geometric distribution** with success probability $\frac{1}{\frac{R_0}{n} + 1}$.
+
+* Because the host is expected to spend 1/n infectious period in each of the infectious compartments.
+
+## The $SI_{n}R$ model (2)
+
+3. Get the PGF $G_X(s)$ of the offspring distribution
+
+* $G_X(s) = \left( \frac{1}{\frac{R_0}{n} + 1 - s \frac{R_0}{n}} \right)^n$
+
+4. Solve $G_X(q) = q$ for the ultimate extinction probability $q$
+
+* $q = \left( \frac{1}{\frac{R_0}{n} + 1 - q \frac{R_0}{n}} \right)^n$
+
+## The $SI_{n}R$ model
 
 ```{r}
 #| code-fold: true
