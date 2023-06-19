@@ -327,7 +327,7 @@ The solutions are $q = 1$ and $q = \frac{1}{R_0}$
 
 $$1 - \mathbb{P}\text{(ultimate extinction)} = 1 - q = 1 - \frac{1}{R_0}$$
 
-## Why $G(q) = q$?
+## Why $G(q) = q$? {visibility="hidden"}
 
 **Lemma:** Let $q_n = \mathbb{P}(Z_n = 0)$ (probability of extinction by generation n). Then $q_n = G(q_{n - 1})$
 
@@ -491,11 +491,65 @@ plot(n, 1-q, type="l", xlab="n", ylab="1-q",
 
 # Metrics for assessing the risk of outbreaks
 
-## Instantaneous Outbreak Risk (IOR)
+## Settings
 
-The risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that **pathogen transmissibility is fixed** at its value when the imported case enters the population
+![](img/model_2.png)
 
-## Case Outbreak Risk (COR)
+* $\Lambda(t)$: vaccination coverage at time t
+
+## Instantaneous Outbreak Risk (IOR) (1)
+
+The risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that **pathogen transmissibility is fixed** at its value when the imported case enters the population.
+
+Infection rate: $\beta (1 - \Lambda(t))$
+
+Removal rate: $\mu$
+
+Reproduction number: $R_V(t) = \frac{\beta (1 - \Lambda(t))}{\mu}$
+
+## Instantaneous Outbreak Risk (IOR) (2)
+
+First step analysis: the first event is an infection or a removal event
+
+$$q_1 = \frac{\beta (1 - \Lambda(t))}{\beta (1 - \Lambda(t)) + \mu} q_2 + \frac{\mu}{\beta (1 - \Lambda(t)) + \mu} q_0$$
+
+According to branching process assumption $q_2 = q_1^2$ and $q_0 = 1$
+
+$$\beta (1 - \Lambda(t)) q_1^2 - (\beta (1 - \Lambda(t)) + \mu) q_1 + \mu = 0$$
+
+## Instantaneous Outbreak Risk (IOR) (3)
+
+Solving this quadratic equation:
+
+$$IOR = 1 - q_1 = \begin{cases} 0 \text{ for } R_V(t) \le 1 \\ 1 - \frac{1}{R_V(t)} \text{ for } R_V(t) > 1 \end{cases}$$
+
+## Case Outbreak Risk (COR) (1)
+
+Account for **changes in the infection rate over time**.
+
+Starting from a single introduction into the population at time $t$ and conditioning on the possible events events in the next $\Delta t$ days.
+
+$\Delta t$: a short time period, so that at most a single event can occur in the interval [$t, \Delta t$)
+
+## Case Outbreak Risk (COR) (2)
+
+$$q_1(t) = \beta (1 - \Lambda(t)) \Delta t \times q_2(t + \Delta t) \\ + \mu \Delta t \times q_0(t + \Delta t) \\ + (1 - \beta (1 - \Lambda(t)) \Delta t - \mu \Delta t) \times q_1(t + \Delta t)$$
+
+Again $q_2(t + \Delta t) = q_1(t + \Delta t)^2$ and $q_0 = 1$
+
+$$q_1(t) = \beta (1 - \Lambda(t)) \Delta t \times q_1(t + \Delta t)^2 \\ + \mu \Delta t + (1 - \beta (1 - \Lambda(t)) \Delta t - \mu \Delta t) \times q_1(t + \Delta t)$$
+
+## Case Outbreak Risk (COR) (3)
+
+Rearranging this expression, and taking the limit $\Delta t \rightarrow 0$
+
+$$\frac{dq(t)}{dt} = \beta (1 - \Lambda(t))q(t)(1 - q(t) + \mu (q(t) - 1)$$
+
+Solving equation (S2) numerically requires the value of q(t) to be known at a single timepoint. In scenarios in which $R_V(t)$ is above one when the vaccine programme is completed, we solve this equation backwards in time starting from the final condition	$q(t^*) = \frac{1}{R_V(t^*)}$, where $t^*$ is the time at which the vaccination programme ends.
+
+## Case Outbreak Risk (COR) (4)
+
+For scenarios in which 𝑅!(𝑡) is instead less than one when the vaccination programme is completed, we set $q(\widetilde{t})$ so that $1 - q(\widetilde{t})$ matches the Numerical Outbreak Risk (NOR) at time $t = \widetilde{t}$, where $\widetilde{t}$ is a value chosen for which $R_V(\widetilde{t}) > 1$. We then solve equation backwards and forwards in time from $t = \widetilde{t}$.
 
 ## Simulated Outbreak Risk (SOR)
 
@@ -503,8 +557,30 @@ Simulating the stochastic model 10,000 times starting from 1 infected individual
 
 SOR = the proportion of simulations in which the number of infected hosts exceeds a pre-defined threshold value (e.g. 100 cases)
 
-## Numerical Outbreak Risk (NOR)
+## Numerical Outbreak Risk (NOR) (1)
+
+NOR is analogous to the SOR, but with the advantage that it **can be calculated without performing model simulations**.
+
+To calculate the NOR, we define the vector $p(t) = (p_0(t), ..., p_{M-1}(t), p_M(t))^T$, where, for $i \le M - 1$, $p_i(t)$ represents the probability that $I(t) = i$ and that the number infected has not reached threshold $M$ by time $t$. The variable $p_M(t)$ is defined as the probability that the number infected has reached threshold $M$ by time $t$. As with the SOR, we again use a value of M = 100 in our analyses.
+
+## Numerical Outbreak Risk (NOR) (2)
+
+Then, the Kolmogorov forward equations are $\frac{dp(t)}{dt} = Q(t)p(t)$, where:
+
+![](img/qt_equation.png)
+
+## Numerical Outbreak Risk (NOR) (3)
+
+In this matrix, the state $I(t) = M$ is an absorbing state (analogous to stopping the simulations as soon as the number infected reaches the threshold M when calculating the SOR). The probability that there are at least M infected individuals at some stage following the introduction of a single infected host into the population at time t is then given by $NOR(t) = lim_{s \rightarrow \infty}(p_M(s))$, where $p(t) = (0,1,0 ... ,0,0)^T$. The NOR is therefore calculated by solving the Kolmogorov forward equations numerically until the system converges to an equilibrium state.
+
+## Compare four metrics
+
+![](img/metrics_risk.png)
 
 ## Acknowledgements
 
-Somya Mehra: for very intuitive explanation of stochastic processes
+**Somya Mehra**: for very intuitive explanation of stochastic processes
+
+Asst Prof **Thitiya Theparod**: for teaching me how to get the two probabilities of the stochastic version from the deterministic version
+
+

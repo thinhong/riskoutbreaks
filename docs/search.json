@@ -25,7 +25,7 @@
     "href": "index.html#stochastic-sir-models-1",
     "title": "Estimate the risk of outbreaks",
     "section": "Stochastic SIR models (1)",
-    "text": "Stochastic SIR models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nGillespie algorithm\n2 possible events:\n\n\\(\\mathbb{P}\\text{(infection event)} = \\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\text{(removal event)} = \\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
+    "text": "Stochastic SIR models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--&gt; I[\"I(t)\"]\n  I --γ--&gt; R[\"R(t)\"]\n\n\n\n\n\nGillespie algorithm\n2 possible events:\n\n\\(\\mathbb{P}\\text{(infection event)} = \\frac{\\beta \\frac{I(t)}{N} S(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)\n\\(\\mathbb{P}\\text{(removal event)} = \\frac{\\gamma I(t)}{\\beta \\frac{I(t)}{N} S(t) + \\gamma I(t)}\\)"
   },
   {
     "objectID": "index.html#stochastic-sir-models-2",
@@ -53,14 +53,14 @@
     "href": "index.html#instantaneous-outbreak-risk-ior",
     "title": "Estimate the risk of outbreaks",
     "section": "Instantaneous Outbreak Risk (IOR)",
-    "text": "Instantaneous Outbreak Risk (IOR)\nThe risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that pathogen transmissibility is fixed at its value when the imported case enters the population"
+    "text": "Instantaneous Outbreak Risk (IOR)\nThe risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that pathogen transmissibility is fixed at its value when the imported case enters the population.\nInfection rate: \\(\\beta (1 - \\Lambda(t))\\)\nRemoval rate: \\(\\mu\\)\nReproduction number: \\(R_V(t) = \\frac{\\beta (1 - \\Lambda(t)}{\\mu}\\)"
   },
   {
     "objectID": "index.html#case-outbreak-risk-cor",
     "href": "index.html#case-outbreak-risk-cor",
     "title": "Estimate the risk of outbreaks",
     "section": "Case Outbreak Risk (COR)",
-    "text": "Case Outbreak Risk (COR)"
+    "text": "Case Outbreak Risk (COR)\nAccount for changes in the infection rate over time.\nStarting from a single introduction into the population at time \\(t\\) and conditioning on the possible events events in the next \\(\\Delta t\\) days.\n\\(\\Delta t\\): a short time period, so that at most a single event can occur in the interval [\\(t, \\Delta t\\))\n\\[q_1(t) = \\beta (1 - \\Lambda(t)) \\Delta t \\times q_2(t + \\Delta t) + \\mu \\Delta t \\times q_0(t + \\Delta t) + \\\\ (1 - \\beta (1 - \\Lambda(t)) \\Delta t - \\mu \\Delta t) \\times q_1(t + \\Delta t)\\]\nCompare to IOR\n\\[q_1 = \\frac{\\beta (1 - \\Lambda(t))}{\\beta (1 - \\Lambda(t)) + \\mu} q_2 + \\frac{\\mu}{\\beta (1 - \\Lambda(t)) + \\mu} q_0\\]"
   },
   {
     "objectID": "index.html#simulated-outbreak-risk-sor",
@@ -74,7 +74,7 @@
     "href": "index.html#numerical-outbreak-risk-nor",
     "title": "Estimate the risk of outbreaks",
     "section": "Numerical Outbreak Risk (NOR)",
-    "text": "Numerical Outbreak Risk (NOR)"
+    "text": "Numerical Outbreak Risk (NOR)\nNOR is analogous to the SOR, but with the advantage that it can be calculated without performing model simulations."
   },
   {
     "objectID": "index.html#deterministic-sir-models",
@@ -123,7 +123,7 @@
     "href": "index.html#acknowledgements",
     "title": "Estimate the risk of outbreaks",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nSomya Mehra: for very intuitive explanation of stochastic processes"
+    "text": "Acknowledgements\nSomya Mehra: for very intuitive explanation of stochastic processes\nAsst Prof Thitiya Theparod: for teaching me how to get the two probabilities of the stochastic version from the deterministic version"
   },
   {
     "objectID": "index.html#branching-process",
@@ -158,7 +158,7 @@
     "href": "index.html#compartmental-outbreak-models-1",
     "title": "Estimate the risk of outbreaks",
     "section": "Compartmental outbreak models (1)",
-    "text": "Compartmental outbreak models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate"
+    "text": "Compartmental outbreak models (1)\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--&gt; I[\"I(t)\"]\n  I --γ--&gt; R[\"R(t)\"]\n\n\n\n\n\n\n\\(\\beta\\): infection rate\n\\(\\gamma\\): removal rate"
   },
   {
     "objectID": "index.html#compartmental-outbreak-models-2",
@@ -263,7 +263,7 @@
     "href": "index.html#pgf-of-geometric-distribution-3",
     "title": "Estimate the risk of outbreaks",
     "section": "PGF of geometric distribution (3)",
-    "text": "PGF of geometric distribution (3)\n\\(G_X(s) = p[1 + s(1 - p) + [s(1 - p)]^2 + ...]\\)\nWe have: \\(1 + r + r^2 + r^3 + ... = \\frac {1} {1 - r}\\) with \\(|r| < 1\\)\n\n\n\n\\(A = 1 + r + r^2 + r^3 + ...\\)\n\\(rA = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow A - rA = 1 \\Leftrightarrow A(1 - r) = 1 \\Leftrightarrow A = \\frac {1} {1 - r}\\)\n\n\n\nHere \\(r = s(1 - p) \\Rightarrow G_X(s) = \\frac{p}{1 - s(1 - p)}\\)"
+    "text": "PGF of geometric distribution (3)\n\\(G_X(s) = p[1 + s(1 - p) + [s(1 - p)]^2 + ...]\\)\nWe have: \\(1 + r + r^2 + r^3 + ... = \\frac {1} {1 - r}\\) with \\(|r| &lt; 1\\)\n\n\n\n\\(A = 1 + r + r^2 + r^3 + ...\\)\n\\(rA = r + r^2 + r^3 + r^4 + ...\\)\n\\(\\Rightarrow A - rA = 1 \\Leftrightarrow A(1 - r) = 1 \\Leftrightarrow A = \\frac {1} {1 - r}\\)\n\n\n\nHere \\(r = s(1 - p) \\Rightarrow G_X(s) = \\frac{p}{1 - s(1 - p)}\\)"
   },
   {
     "objectID": "index.html#prove-this",
@@ -438,7 +438,7 @@
     "href": "index.html#gamma-distributed-infectious-period",
     "title": "Estimate the risk of outbreaks",
     "section": "Gamma distributed infectious period",
-    "text": "Gamma distributed infectious period\nUsing constant removal rate assume that the infectious period is exponentially distributed.\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I[\"I(t)\"]\n  I --γ--> R[\"R(t)\"]\n\n\n\n\n\n\n\n\nWe split the I compartment into n subcompartments, as a gamma distribution with shape n and rate \\(\\lambda\\) (Erlang distribution) can be thought of as the sum of n exponential distributions each with rate \\(\\lambda\\).\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--> I1[\"I1(t)\"]\n  I1 --γnI1--> I2[\"I2(t)\"]\n  I2 --γnI2--> I3[\"...\"]\n  I3 --> In[\"In(t)\"]\n  In --γnIn--> R[\"R(t)\"]"
+    "text": "Gamma distributed infectious period\nUsing constant removal rate assume that the infectious period is exponentially distributed.\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--&gt; I[\"I(t)\"]\n  I --γ--&gt; R[\"R(t)\"]\n\n\n\n\n\nWe split the I compartment into n subcompartments, as a gamma distribution with shape n and rate \\(\\lambda\\) (Erlang distribution) can be thought of as the sum of n exponential distributions each with rate \\(\\lambda\\).\n\n\n\n\nflowchart LR\n  S[\"S(t)\"] --βI/N--&gt; I1[\"I1(t)\"]\n  I1 --γnI1--&gt; I2[\"I2(t)\"]\n  I2 --γnI2--&gt; I3[\"...\"]\n  I3 --&gt; In[\"In(t)\"]\n  In --γnIn--&gt; R[\"R(t)\"]"
   },
   {
     "objectID": "index.html#the-si_nr-model-1",
@@ -459,6 +459,90 @@
     "href": "index.html#the-si_nr-model",
     "title": "Estimate the risk of outbreaks",
     "section": "The \\(SI_{n}R\\) model",
-    "text": "The \\(SI_{n}R\\) model\n\n\nCode\nsolve_q <- function(R0, n){\n  # define the equation\n  f <- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result <- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 <- 2\nn <- seq(0.001, 5, 0.001)\nq <- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] <- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+    "text": "The \\(SI_{n}R\\) model\n\n\nCode\nsolve_q &lt;- function(R0, n){\n  # define the equation\n  f &lt;- function(q) (1 / ((R0 / n) + 1 - q * (R0 / n))^n) - q\n  \n  # use uniroot function to find the root of the equation\n  result &lt;- uniroot(f, lower=0, upper=0.999)$root\n  \n  return(result)\n}\n\nR0 &lt;- 2\nn &lt;- seq(0.001, 5, 0.001)\nq &lt;- numeric(length(n))\n\nfor (i in 1:length(n)){\n  q[i] &lt;- solve_q(R0, n[i])\n}\n\nplot(n, 1-q, type=\"l\", xlab=\"n\", ylab=\"1-q\", \n     xlim = c(0, 5), ylim = c(0, 0.8))"
+  },
+  {
+    "objectID": "index.html#settings",
+    "href": "index.html#settings",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Settings",
+    "text": "Settings\n\n\n\\(\\Lambda(t)\\): vaccination coverage at time t"
+  },
+  {
+    "objectID": "index.html#instantaneous-outbreak-risk-ior-1",
+    "href": "index.html#instantaneous-outbreak-risk-ior-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Instantaneous Outbreak Risk (IOR) (1)",
+    "text": "Instantaneous Outbreak Risk (IOR) (1)\nThe risk that an imported case initiates an outbreak as opposed to the virus simply fading out, under the assumption that pathogen transmissibility is fixed at its value when the imported case enters the population.\nInfection rate: \\(\\beta (1 - \\Lambda(t))\\)\nRemoval rate: \\(\\mu\\)\nReproduction number: \\(R_V(t) = \\frac{\\beta (1 - \\Lambda(t))}{\\mu}\\)"
+  },
+  {
+    "objectID": "index.html#instantaneous-outbreak-risk-ior-2",
+    "href": "index.html#instantaneous-outbreak-risk-ior-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Instantaneous Outbreak Risk (IOR) (2)",
+    "text": "Instantaneous Outbreak Risk (IOR) (2)\nFirst step analysis: the first event is an infection or a removal event\n\\[q_1 = \\frac{\\beta (1 - \\Lambda(t))}{\\beta (1 - \\Lambda(t)) + \\mu} q_2 + \\frac{\\mu}{\\beta (1 - \\Lambda(t)) + \\mu} q_0\\]\nAccording to branching process assumption \\(q_2 = q_1^2\\) and \\(q_0 = 1\\)\n\\[\\beta (1 - \\Lambda(t)) q_1^2 - (\\beta (1 - \\Lambda(t)) + \\mu) q_1 + \\mu = 0\\]"
+  },
+  {
+    "objectID": "index.html#instantaneous-outbreak-risk-ior-3",
+    "href": "index.html#instantaneous-outbreak-risk-ior-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Instantaneous Outbreak Risk (IOR) (3)",
+    "text": "Instantaneous Outbreak Risk (IOR) (3)\nSolving this quadratic equation:\n\\[IOR = 1 - q_1 = \\begin{cases} 0 \\text{ for } R_V(t) \\le 1 \\\\ 1 - \\frac{1}{R_V(t)} \\text{ for } R_V(t) &gt; 1 \\end{cases}\\]"
+  },
+  {
+    "objectID": "index.html#case-outbreak-risk-cor-1",
+    "href": "index.html#case-outbreak-risk-cor-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Case Outbreak Risk (COR) (1)",
+    "text": "Case Outbreak Risk (COR) (1)\nAccount for changes in the infection rate over time.\nStarting from a single introduction into the population at time \\(t\\) and conditioning on the possible events events in the next \\(\\Delta t\\) days.\n\\(\\Delta t\\): a short time period, so that at most a single event can occur in the interval [\\(t, \\Delta t\\))"
+  },
+  {
+    "objectID": "index.html#case-outbreak-risk-cor-2",
+    "href": "index.html#case-outbreak-risk-cor-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Case Outbreak Risk (COR) (2)",
+    "text": "Case Outbreak Risk (COR) (2)\n\\[q_1(t) = \\beta (1 - \\Lambda(t)) \\Delta t \\times q_2(t + \\Delta t) \\\\ + \\mu \\Delta t \\times q_0(t + \\Delta t) \\\\ + (1 - \\beta (1 - \\Lambda(t)) \\Delta t - \\mu \\Delta t) \\times q_1(t + \\Delta t)\\]\nAgain \\(q_2(t + \\Delta t) = q_1(t + \\Delta t)^2\\) and \\(q_0 = 1\\)\n\\[q_1(t) = \\beta (1 - \\Lambda(t)) \\Delta t \\times q_1(t + \\Delta t)^2 \\\\ + \\mu \\Delta t + (1 - \\beta (1 - \\Lambda(t)) \\Delta t - \\mu \\Delta t) \\times q_1(t + \\Delta t)\\]"
+  },
+  {
+    "objectID": "index.html#case-outbreak-risk-cor-3",
+    "href": "index.html#case-outbreak-risk-cor-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Case Outbreak Risk (COR) (3)",
+    "text": "Case Outbreak Risk (COR) (3)\nRearranging this expression, and taking the limit \\(\\Delta t \\rightarrow 0\\)\n\\[\\frac{dq(t)}{dt} = \\beta (1 - \\Lambda(t))q(t)(1 - q(t) + \\mu (q(t) - 1)\\]\nSolving equation (S2) numerically requires the value of q(t) to be known at a single timepoint. In scenarios in which \\(R_V(t)\\) is above one when the vaccine programme is completed, we solve this equation backwards in time starting from the final condition \\(q(t^*) = \\frac{1}{R_V(t^*)}\\), where \\(t^*\\) is the time at which the vaccination programme ends."
+  },
+  {
+    "objectID": "index.html#numerical-outbreak-risk-nor-1",
+    "href": "index.html#numerical-outbreak-risk-nor-1",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Numerical Outbreak Risk (NOR) (1)",
+    "text": "Numerical Outbreak Risk (NOR) (1)\nNOR is analogous to the SOR, but with the advantage that it can be calculated without performing model simulations.\nTo calculate the NOR, we define the vector \\(p(t) = (p_0(t), ..., p_{M-1}(t), p_M(t))^T\\), where, for \\(i \\le M - 1\\), \\(p_i(t)\\) represents the probability that \\(I(t) = i\\) and that the number infected has not reached threshold \\(M\\) by time \\(t\\). The variable \\(p_M(t)\\) is defined as the probability that the number infected has reached threshold \\(M\\) by time \\(t\\). As with the SOR, we again use a value of M = 100 in our analyses."
+  },
+  {
+    "objectID": "index.html#numerical-outbreak-risk-nor-2",
+    "href": "index.html#numerical-outbreak-risk-nor-2",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Numerical Outbreak Risk (NOR) (2)",
+    "text": "Numerical Outbreak Risk (NOR) (2)\nThen, the Kolmogorov forward equations are \\(\\frac{dp(t)}{dt} = Q(t)p(t)\\), where:"
+  },
+  {
+    "objectID": "index.html#compare-four-metrics",
+    "href": "index.html#compare-four-metrics",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Compare four metrics",
+    "text": "Compare four metrics"
+  },
+  {
+    "objectID": "index.html#numerical-outbreak-risk-nor-3",
+    "href": "index.html#numerical-outbreak-risk-nor-3",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Numerical Outbreak Risk (NOR) (3)",
+    "text": "Numerical Outbreak Risk (NOR) (3)\nIn this matrix, the state \\(I(t) = M\\) is an absorbing state (analogous to stopping the simulations as soon as the number infected reaches the threshold M when calculating the SOR). The probability that there are at least M infected individuals at some stage following the introduction of a single infected host into the population at time t is then given by \\(NOR(t) = lim_{s \\rightarrow \\infty}(p_M(s))\\), where \\(p(t) = (0,1,0 ... ,0,0)^T\\). The NOR is therefore calculated by solving the Kolmogorov forward equations numerically until the system converges to an equilibrium state."
+  },
+  {
+    "objectID": "index.html#case-outbreak-risk-cor-4",
+    "href": "index.html#case-outbreak-risk-cor-4",
+    "title": "Estimate the risk of outbreaks",
+    "section": "Case Outbreak Risk (COR) (4)",
+    "text": "Case Outbreak Risk (COR) (4)\nFor scenarios in which 𝑅!(𝑡) is instead less than one when the vaccination programme is completed, we set \\(q(\\widetilde{t})\\) so that \\(1 - q(\\widetilde{t})\\) matches the Numerical Outbreak Risk (NOR) at time \\(t = \\widetilde{t}\\), where \\(\\widetilde{t}\\) is a value chosen for which \\(R_V(\\widetilde{t}) &gt; 1\\). We then solve equation backwards and forwards in time from \\(t = \\widetilde{t}\\)."
   }
 ]
